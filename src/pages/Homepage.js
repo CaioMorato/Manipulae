@@ -1,57 +1,54 @@
 import React from 'react';
 import Header from '../components/Header';
-import axios from 'axios';
-import { saveTopListened } from '../redux/actions';
+import { connect } from 'react-redux';
+import { fetchAPI } from '../redux/actions';
+import { SongsSection } from '../styles';
 
 class Homepage extends React.Component {
   constructor() {
     super();
 
-    this.firstFetch = this.firstFetch.bind(this);
     this.loadingGenerator = this.loadingGenerator.bind(this);
-
-    this.state = {
-      tracks: {},
-      loading: true,
-    };
   }
+
   componentDidMount() {
-    this.firstFetch();
-  }
-
-  async firstFetch() {
-    await axios.get('/chart').then((data) => {
-      this.setState({
-        loading: false,
-        tracks: Object.values(data)[0].tracks,
-      });
-    });
+    const { firstFetch } = this.props;
+    firstFetch();
   }
 
   loadingGenerator() {
-    const { loading } = this.state;
+    const { loading } = this.props;
     if (loading) {
       return <span>Loading...</span>;
     }
   }
+
   render() {
-    const { tracks } = this.state;
+    const { tracks } = this.props;
     return (
       <div>
         <Header />
-        <main>
-          <h2>Mais tocadas:</h2>
+        <SongsSection>
           {this.loadingGenerator() ||
             tracks.data.map((item) => (
               <div>
                 <h4>{item.title}</h4>
-                <img src={item.artist.picture} alt="" />
+                <img src={item.album.cover} alt="" />
               </div>
             ))}
-        </main>
+        </SongsSection>
       </div>
     );
   }
 }
 
-export default connect(null, mapDispatchToProps)(Homepage);
+const mapStateToProps = (state) => ({
+  loading: state.listReducer.loading,
+  tracks: state.listReducer.tracks,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  firstFetch: () => dispatch(fetchAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
