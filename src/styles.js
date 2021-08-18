@@ -51,8 +51,12 @@ export const MostPlayed = styled.div`
 export const SongsDiv = styled.div`
   display: flex;
   flex-flow: column;
-  margin: 15px;
-  width: 122px;
-  align-items: center;
-  justify-content: center;
+  > h4,
+  p {
+    text-align: center;
+  }
+  > div {
+    display: flex;
+    justify-content: space-around;
+  }
 `;

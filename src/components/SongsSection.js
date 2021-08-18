@@ -46,9 +46,12 @@ class SongsSection extends React.Component {
               {tracks.data.map((music) => (
                 <SongsDiv>
                   <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} />
-                  <h4>{music.title}</h4>
+                  <div>
+                    <h4>{music.title}</h4>
+                    <h4>{(music.duration / 60).toFixed(2).replace('.', ':')}</h4>
+                  </div>
                   <p>{music.artist.name}</p>
-                  <p>{(music.duration / 60).toFixed(2).replace('.', ':')}</p>
+                  <p></p>
                   <a href={music.link} target="_blank" rel="noreferrer">
                     Confira no Deezer!
                   </a>
