@@ -4,13 +4,17 @@
   box-sizing: border-box;
 }
 
+::-webkit-input-placeholder {
+  color: black;
+}
+
 /* carousel .section-carousel { */
-  /* display: flex; */
-  /* flex-flow: row; */
+/* display: flex; */
+/* flex-flow: row; */
 /* } */
 /*  */
 /* .carousel .thumbs-wrapper { */
-  /* display: none; */
+/* display: none; */
 /* } */
 
 /* .section-carousel { */
