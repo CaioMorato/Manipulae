@@ -62,7 +62,7 @@ class SongsSection extends React.Component {
                     Adicione aos favoritos
                   </a>
                   <br />
-                  <button type="button" onClick={() => dispatchSong(`${music.album.cover_small}`)}>
+                  <button type="button" onClick={() => dispatchSong({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
                     Ouvir
                   </button>
                 </SongsDiv>
