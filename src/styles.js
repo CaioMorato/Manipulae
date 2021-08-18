@@ -41,35 +41,36 @@ export const AccountDiv = styled.div`
   justify-content: center;
   align-items: center;
   > p {
-    margin: 7px auto ;
+    margin: 7px auto;
   }
 `;
 
 export const MostPlayedSection = styled.div`
-background-color: white;
-`
-
+  box-shadow: 1px 1px 1px 3px #efeffa;
+  width: 98vw;
+  margin: 20px auto;
+  border-radius: 9px;
+  font-family: 'Recursive', sans-serif;
+  padding: 8px 6px;
+`;
 
 export const SectionTitle = styled.h2`
   text-align: center;
-  margin: 15px auto;
+  margin: 10px auto;
 `;
 
 export const MostPlayed = styled.div`
-  width: 100vw;
-  margin: 0;
+  width: 100%;
+  /* margin: 15px auto; */
 `;
 
 export const SongsDiv = styled.div`
+  border: 1px green solid;
   display: flex;
-  flex-flow: column;
-  > h4,
-  p {
-    text-align: center;
-  }
-  > div {
-    display: flex;
-    justify-content: space-around;
+
+  > img {
+    justify-self: center;
+    align-self: center;
   }
 `;
 

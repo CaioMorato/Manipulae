@@ -1,6 +1,7 @@
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Recursive&family=Roboto&display=swap');
 
 * {
   margin: 0;
@@ -8,8 +9,13 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: aliceblue;
+.carousel-slider {
+  border: 1px red solid;
+}
+
+.slick-slide {
+  width: 220px !important;
+  border: 1px blue solid;
 }
 
 ::-webkit-input-placeholder {

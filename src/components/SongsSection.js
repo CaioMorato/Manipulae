@@ -27,7 +27,6 @@ class SongsSection extends React.Component {
   render() {
     const {
       chart: { tracks },
-      dispatchSong,
     } = this.props;
 
     const carouselSettings = {
@@ -35,8 +34,8 @@ class SongsSection extends React.Component {
       className: 'center',
       infinite: true,
       centerMode: true,
-      centerPadding: '60px',
-      slidesToShow: 5,
+      centerPadding: '65px',
+      slidesToShow: 4,
       swipeToSlide: true,
     };
     return (
@@ -44,11 +43,11 @@ class SongsSection extends React.Component {
         <SectionTitle>Músicas mais ouvidas:</SectionTitle>
         <MostPlayed>
           {this.loadingGenerator() || (
-            <Slider {...carouselSettings}>
+            <Slider {...carouselSettings} className="carousel-slider">
               {tracks.data.map((music) => (
                 <SongsDiv>
-                  <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} />
-                  <div>
+                  <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} width="200px" />
+                  {/* <div>
                     <h4>{music.title}</h4>
                     <h4>{(music.duration / 60).toFixed(2).replace('.', ':')}</h4>
                   </div>
@@ -64,7 +63,7 @@ class SongsSection extends React.Component {
                   <br />
                   <button type="button" onClick={() => dispatchSong({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
                     Ouvir
-                  </button>
+                  </button> */}
                 </SongsDiv>
               ))}
             </Slider>
