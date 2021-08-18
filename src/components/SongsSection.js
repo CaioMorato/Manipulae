@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAPI, saveCurrentSong } from '../redux/actions';
-import { MostPlayed, SongsDiv, MostPlayedSection } from '../styles';
+import { MostPlayed, SongsDiv, MostPlayedSection, ButtonsDiv } from '../styles';
 import { SectionTitle } from '../styles';
 import Slider from 'react-slick';
+import { IoMdPlay } from 'react-icons/io';
+// the icon below credits to Freepik from flaticons.com
+import deezerLogo from '../images/deezer-logo.png';
+// the icon below credits to Pixel Perfect from flaticons.com
+import star from '../images/star.png';
 
 class SongsSection extends React.Component {
   constructor() {
@@ -27,6 +32,7 @@ class SongsSection extends React.Component {
   render() {
     const {
       chart: { tracks },
+      dispatchSong,
     } = this.props;
 
     const carouselSettings = {
@@ -46,24 +52,23 @@ class SongsSection extends React.Component {
             <Slider {...carouselSettings} className="carousel-slider">
               {tracks.data.map((music) => (
                 <SongsDiv>
-                  <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} width="200px" />
-                  {/* <div>
-                    <h4>{music.title}</h4>
-                    <h4>{(music.duration / 60).toFixed(2).replace('.', ':')}</h4>
+                  <h4>{music.title}</h4>
+                  <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} width="190px" />
+                  <div>
+                    <p>{music.artist.name}</p>
+                    <h5>{(music.duration / 60).toFixed(2).replace('.', ':')}</h5>
                   </div>
-                  <p>{music.artist.name}</p>
-                  <p></p>
-                  <a href={music.link} target="_blank" rel="noreferrer">
-                    Confira no Deezer!
-                  </a>
-                  <br />
-                  <a href="https://google.com" target="_blank" rel="noreferrer">
-                    Adicione aos favoritos
-                  </a>
-                  <br />
-                  <button type="button" onClick={() => dispatchSong({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
-                    Ouvir
-                  </button> */}
+                  <ButtonsDiv>
+                    <a href={music.link} target="_blank" rel="noreferrer">
+                      <img src={deezerLogo} alt="Ícone do logo do deezer" />
+                    </a>
+                    <button type="button" onClick={() => dispatchSong({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
+                      <IoMdPlay />
+                    </button>
+                    <a href="https://google.com" target="_blank" rel="noreferrer">
+                      <img src={star} alt="Ícone representando favoritos" />
+                    </a>
+                  </ButtonsDiv>
                 </SongsDiv>
               ))}
             </Slider>

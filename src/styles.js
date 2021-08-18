@@ -46,7 +46,7 @@ export const AccountDiv = styled.div`
 `;
 
 export const MostPlayedSection = styled.div`
-  box-shadow: 1px 1px 1px 3px #efeffa;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
   width: 98vw;
   margin: 20px auto;
   border-radius: 9px;
@@ -61,16 +61,45 @@ export const SectionTitle = styled.h2`
 
 export const MostPlayed = styled.div`
   width: 100%;
-  /* margin: 15px auto; */
 `;
 
 export const SongsDiv = styled.div`
-  border: 1px green solid;
-  display: flex;
+  /* border: 1px blue solid; */
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  margin: auto auto 20px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
 
-  > img {
-    justify-self: center;
-    align-self: center;
+  > h4,
+  p {
+    text-align: center;
+  }
+`;
+
+export const ButtonsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around !important  ;
+
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    border-radius: 20px;
+    height: 20px;
+    background-color: white;
+    outline: none;
+    border: 1px black solid;
+  }
+
+  > button:hover {
+    cursor: pointer;
+    transform: scale(1.04);
   }
 `;
 

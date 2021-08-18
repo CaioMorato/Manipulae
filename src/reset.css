@@ -9,13 +9,12 @@
   box-sizing: border-box;
 }
 
-.carousel-slider {
-  border: 1px red solid;
-}
-
 .slick-slide {
   width: 220px !important;
-  border: 1px blue solid;
+  height: max-content !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 ::-webkit-input-placeholder {
