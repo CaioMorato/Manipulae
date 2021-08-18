@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SearchHeader = styled.header`
   display: flex;
   justify-content: space-around;
-  background-color: #225264;
+  font-family: 'Roboto', sans-serif;
 `;
 
 export const HeaderDiv = styled.div`
@@ -17,15 +17,22 @@ export const SearchInputContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  > img {
+    position: relative;
+    left: 32px;
+    height: 24px;
+  }
 `;
 
 export const SearchInput = styled.input`
   width: 65%;
   height: 40%;
   border-radius: 7px;
-  background-color: #c3c3c3;
-  font-weight: 800;
-  padding: 7px;
+  padding: 0 0 0 34px;
+  outline: none;
+  font-weight: 600;
+  font-size: 15px;
 `;
 
 export const AccountDiv = styled.div`
@@ -34,9 +41,14 @@ export const AccountDiv = styled.div`
   justify-content: center;
   align-items: center;
   > p {
-    color: white;
+    margin: 7px auto ;
   }
 `;
+
+export const MostPlayedSection = styled.div`
+background-color: white;
+`
+
 
 export const SectionTitle = styled.h2`
   text-align: center;

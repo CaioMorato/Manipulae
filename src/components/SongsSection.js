@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAPI, saveCurrentSong } from '../redux/actions';
-import { MostPlayed, SongsDiv } from '../styles';
+import { MostPlayed, SongsDiv, MostPlayedSection } from '../styles';
 import { SectionTitle } from '../styles';
 import Slider from 'react-slick';
 
@@ -40,7 +40,7 @@ class SongsSection extends React.Component {
       swipeToSlide: true,
     };
     return (
-      <>
+      <MostPlayedSection>
         <SectionTitle>Músicas mais ouvidas:</SectionTitle>
         <MostPlayed>
           {this.loadingGenerator() || (
@@ -70,7 +70,7 @@ class SongsSection extends React.Component {
             </Slider>
           )}
         </MostPlayed>
-      </>
+      </MostPlayedSection>
     );
   }
 }

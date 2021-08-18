@@ -8,10 +8,11 @@ class Header extends React.Component {
     return (
       <SearchHeader>
         <HeaderDiv>
-          <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="" />
+          <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="Logo da minha futura empresa querida" />
         </HeaderDiv>
         <SearchInputContainer>
-          <SearchInput type="text" placeholder="Pesquise por música, cantor ou álbum" />
+          <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="" />
+          <SearchInput type="text" placeholder="Pesquise por nome de música, artista ou álbum" />
         </SearchInputContainer>
         <AccountDiv>
           <img src={profile} alt="Foto de perfil" />

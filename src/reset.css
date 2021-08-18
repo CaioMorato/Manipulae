@@ -1,5 +1,6 @@
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
   margin: 0;
@@ -7,35 +8,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: aliceblue;
+}
+
 ::-webkit-input-placeholder {
   color: black;
 }
-
-/* carousel .section-carousel { */
-/* display: flex; */
-/* flex-flow: row; */
-/* } */
-/*  */
-/* .carousel .thumbs-wrapper { */
-/* display: none; */
-/* } */
-
-/* .section-carousel { */
-/* background-color: brown; */
-/* display: flex; */
-/* justify-content: center; */
-/* flex-direction: row; */
-/* } */
-/*  */
-/* .carousel .thumbs-wrapper { */
-/* display: none; */
-/* } */
-/*  */
-/* .carousel-slider { */
-/* background: black; */
-/* height: 300px; */
-/* } */
-/*  */
-/* carousel .carousel-status { */
-/* display: none; */
-/* } */
