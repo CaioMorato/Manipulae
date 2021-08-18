@@ -2,6 +2,7 @@ import axios from 'axios';
 export const TOP_10 = 'TOP_10';
 export const SET_LOADING = 'SET_LOADING';
 export const FETCH_ERROR = 'FETCH_ERROR';
+export const CURRENT_SONG = 'CURRENT_SONG';
 
 export const saveTopListened = (payload) => ({
   type: TOP_10,
@@ -29,3 +30,8 @@ export const fetchAPI = () => {
     }
   };
 };
+
+export const saveCurrentSong = (payload) => ({
+  type: CURRENT_SONG,
+  payload,
+});

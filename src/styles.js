@@ -60,3 +60,15 @@ export const SongsDiv = styled.div`
     justify-content: space-around;
   }
 `;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  border: 1px black solid;
+  > img {
+    margin: 0;
+    width: 50px;
+    height: 50px;
+  }
+`;
