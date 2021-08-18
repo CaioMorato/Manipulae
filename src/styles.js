@@ -26,7 +26,7 @@ export const SearchInputContainer = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  width: 65%;
+  width: 56%;
   height: 40%;
   border-radius: 7px;
   padding: 0 0 0 34px;
@@ -67,7 +67,7 @@ export const SongsDiv = styled.div`
   /* border: 1px blue solid; */
   border-radius: 8px;
   padding: 5px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: -2px 2px 5px 3px rgba(0, 0, 0, 0.2);
   margin: auto auto 20px;
   > div {
     display: flex;
