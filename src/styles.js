@@ -40,19 +40,19 @@ export const AccountDiv = styled.div`
 
 export const SectionTitle = styled.h2`
   text-align: center;
+  margin: 15px auto;
 `;
 
 export const MostPlayed = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  border: 1px black solid;
-  height: max-content;
-  width: 90vw;
+  width: 100vw;
+  margin: 0;
 `;
 
 export const SongsDiv = styled.div`
-  margin: 20px;
-  border: 1px black solid;
+  display: flex;
+  flex-flow: column;
+  margin: 15px;
   width: 122px;
+  align-items: center;
+  justify-content: center;
 `;
