@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import { connect } from 'react-redux';
 import { fetchAPI } from '../redux/actions';
-import { SongsSection } from '../styles';
+import { SongsSection, SectionTitle } from '../styles';
 
 class Homepage extends React.Component {
   constructor() {
@@ -26,18 +26,21 @@ class Homepage extends React.Component {
   render() {
     const { tracks } = this.props;
     return (
-      <div>
+      <>
         <Header />
-        <SongsSection>
-          {this.loadingGenerator() ||
-            tracks.data.map((item) => (
-              <div>
-                <h4>{item.title}</h4>
-                <img src={item.album.cover} alt="" />
-              </div>
-            ))}
-        </SongsSection>
-      </div>
+        <SectionTitle>
+          <h2>Músicas mais ouvidas:</h2>
+          <SongsSection>
+            {this.loadingGenerator() ||
+              tracks.data.map((item) => (
+                <div>
+                  <h4>{item.title}</h4>
+                  <img src={item.album.cover} alt="" />
+                </div>
+              ))}
+          </SongsSection>
+        </SectionTitle>
+      </>
     );
   }
 }
