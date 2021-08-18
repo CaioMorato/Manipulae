@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import { connect } from 'react-redux';
 import { fetchAPI } from '../redux/actions';
-import { SongsSection, SectionTitle } from '../styles';
+import { SongsSection, SectionTitle, SongsDiv } from '../styles';
 
 class Homepage extends React.Component {
   constructor() {
@@ -24,22 +24,31 @@ class Homepage extends React.Component {
   }
 
   render() {
-    const { tracks } = this.props;
+    const {
+      chart: { tracks },
+    } = this.props;
     return (
       <>
         <Header />
-        <SectionTitle>
-          <h2>Músicas mais ouvidas:</h2>
-          <SongsSection>
-            {this.loadingGenerator() ||
-              tracks.data.map((item) => (
-                <div>
-                  <h4>{item.title}</h4>
-                  <img src={item.album.cover} alt="" />
-                </div>
+        <section>
+          <SectionTitle>Músicas mais ouvidas:</SectionTitle>
+          {this.loadingGenerator() || (
+            <SongsSection>
+              {tracks.data.map((music) => (
+                <SongsDiv>
+                  <h4>{music.title}</h4>
+                  <img src={music.album.cover} alt={`Capa da música ${music.title}`} />
+                  <p>{music.artist.name}</p>
+                  <p>{(music.duration / 60).toFixed(2).replace('.', ':')}</p>
+                  <a href={music.link} target="_blank" rel="noreferrer">
+                    Confira no Deezer!
+                  </a>
+                </SongsDiv>
               ))}
-          </SongsSection>
-        </SectionTitle>
+            </SongsSection>
+          )}
+          {/* <SongsSection></SongsSection> */}
+        </section>
       </>
     );
   }
@@ -47,7 +56,7 @@ class Homepage extends React.Component {
 
 const mapStateToProps = (state) => ({
   loading: state.listReducer.loading,
-  tracks: state.listReducer.tracks,
+  chart: state.listReducer.chart,
 });
 
 const mapDispatchToProps = (dispatch) => ({

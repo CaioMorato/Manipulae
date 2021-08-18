@@ -23,8 +23,7 @@ export const fetchAPI = () => {
     try {
       const requestMusic = await axios.get('/chart');
       // const apiJSON = await requestMusic.json()
-      console.log(requestMusic.data.tracks);
-      dispatch(saveTopListened(requestMusic.data.tracks));
+      dispatch(saveTopListened(requestMusic.data));
     } catch (error) {
       dispatch(errorFetching(error));
     }

@@ -3,3 +3,32 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* carousel .section-carousel { */
+  /* display: flex; */
+  /* flex-flow: row; */
+/* } */
+/*  */
+/* .carousel .thumbs-wrapper { */
+  /* display: none; */
+/* } */
+
+/* .section-carousel { */
+/* background-color: brown; */
+/* display: flex; */
+/* justify-content: center; */
+/* flex-direction: row; */
+/* } */
+/*  */
+/* .carousel .thumbs-wrapper { */
+/* display: none; */
+/* } */
+/*  */
+/* .carousel-slider { */
+/* background: black; */
+/* height: 300px; */
+/* } */
+/*  */
+/* carousel .carousel-status { */
+/* display: none; */
+/* } */

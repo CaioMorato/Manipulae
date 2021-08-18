@@ -1,7 +1,7 @@
 import { FETCH_ERROR, SET_LOADING, TOP_10 } from '../actions';
 
 const INITIAL_USER_STATE = {
-  tracks: {},
+  chart: {},
   loading: true,
   error: '',
 };
@@ -11,7 +11,7 @@ const listReducer = (state = INITIAL_USER_STATE, action) => {
     case TOP_10:
       return {
         ...state,
-        tracks: action.payload,
+        chart: action.payload,
         loading: false,
       };
     case SET_LOADING:
