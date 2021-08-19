@@ -76,4 +76,5 @@ const mapStateToProps = (state) => ({
   loading: state.listReducer.loading,
   chart: state.listReducer.chart,
 });
+
 export default connect(mapStateToProps)(SongsSection);

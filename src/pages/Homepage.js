@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import SongsSection from '../components/SongsSection';
 import MusicPlayer from '../components/MusicPlayer';
-import { fetchAPI } from '../redux/actions';
+import { fetchAPI } from '../redux/actions/firstFetchActions';
 
 class Homepage extends React.Component {
   constructor() {
