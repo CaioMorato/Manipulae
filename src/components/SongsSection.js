@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchAPI, saveCurrentSong } from '../redux/actions';
 import { MostPlayed, SongsDiv, MostPlayedSection, ButtonsDiv } from '../styles';
 import { SectionTitle } from '../styles';
 import Slider from 'react-slick';
@@ -17,11 +16,6 @@ class SongsSection extends React.Component {
     this.loadingGenerator = this.loadingGenerator.bind(this);
   }
 
-  componentDidMount() {
-    const { firstFetch } = this.props;
-    firstFetch();
-  }
-
   loadingGenerator() {
     const { loading } = this.props;
     if (loading) {
@@ -32,7 +26,6 @@ class SongsSection extends React.Component {
   render() {
     const {
       chart: { tracks },
-      dispatchSong,
     } = this.props;
 
     const carouselSettings = {
@@ -62,7 +55,7 @@ class SongsSection extends React.Component {
                     <a href={music.link} target="_blank" rel="noreferrer">
                       <img src={deezerLogo} alt="Ícone do logo do deezer" />
                     </a>
-                    <button type="button" onClick={() => dispatchSong({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
+                    <button type="button">
                       <IoMdPlay />
                     </button>
                     <a href="https://google.com" target="_blank" rel="noreferrer">
@@ -83,10 +76,4 @@ const mapStateToProps = (state) => ({
   loading: state.listReducer.loading,
   chart: state.listReducer.chart,
 });
-
-const mapDispatchToProps = (dispatch) => ({
-  firstFetch: () => dispatch(fetchAPI()),
-  dispatchSong: (payload) => dispatch(saveCurrentSong(payload)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SongsSection);
+export default connect(mapStateToProps)(SongsSection);

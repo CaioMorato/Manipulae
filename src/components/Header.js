@@ -5,6 +5,7 @@ import profile from '../images/profile.png';
 
 class Header extends React.Component {
   render() {
+    const { handleChange } = this.props;
     return (
       <SearchHeader>
         <HeaderDiv>
@@ -12,7 +13,7 @@ class Header extends React.Component {
         </HeaderDiv>
         <SearchInputContainer>
           <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="" />
-          <SearchInput type="text" placeholder="Pesquise por nome de música, artista ou álbum" />
+          <SearchInput type="text" placeholder="Pesquise por nome de música, artista ou álbum" onChange={handleChange} />
         </SearchInputContainer>
         <AccountDiv>
           <img src={profile} alt="Foto de perfil" />
