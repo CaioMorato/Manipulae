@@ -27,8 +27,7 @@ export const fetchAPIWithQuery = (query) => {
   return async (dispatch) => {
     dispatch(getSearchMusics());
     try {
-      const requestMusic = await axios.get(`/search?q=${query}`);
-      console.log(query);
+      const requestMusic = await axios.get(`/search?q=${query}&index=0`);
       dispatch(saveSearchMusics(requestMusic));
     } catch (error) {
       dispatch(errorFetching(error));

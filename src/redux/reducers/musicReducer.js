@@ -4,6 +4,7 @@ const INITIAL_USER_STATE = {
   showChart: true,
   loading: false,
   search_songs: {},
+  quantity: '0',
   current_song: '',
   current_song_cover: 'https://www.kindpng.com/picc/m/130-1306421_vinyl-record-png-vinyl-png-transparent-png.png',
   error: {},
@@ -21,6 +22,7 @@ const musicReducer = (state = INITIAL_USER_STATE, action) => {
       return {
         ...state,
         search_songs: action.payload,
+        quantity: Number(state.quantity) + 25,
         loading: false,
         showChart: false,
       };

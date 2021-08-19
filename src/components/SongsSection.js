@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { MostPlayedSection } from '../styles';
-import { MostPlayed } from '../styles';
 import { SectionTitle } from '../styles';
 import SongsList from './SongsList';
 class SongsSection extends React.Component {
@@ -21,8 +20,7 @@ class SongsSection extends React.Component {
     return (
       <MostPlayedSection>
         <SectionTitle>Músicas mais ouvidas:</SectionTitle>
-        <SongsList />
-        {/* {this.loadingGenerator() || <SongsList />} */}
+        {this.loadingGenerator() || <SongsList />}
       </MostPlayedSection>
     );
   }
