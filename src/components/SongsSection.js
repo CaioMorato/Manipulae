@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { saveCurrentSong } from '../redux/actions/index';
 import { MostPlayed, SongsDiv, MostPlayedSection, ButtonsDiv } from '../styles';
 import { SectionTitle } from '../styles';
 import Slider from 'react-slick';
@@ -26,6 +27,7 @@ class SongsSection extends React.Component {
   render() {
     const {
       chart: { tracks },
+      sendSongToRedux,
     } = this.props;
 
     const carouselSettings = {
@@ -55,7 +57,7 @@ class SongsSection extends React.Component {
                     <a href={music.link} target="_blank" rel="noreferrer">
                       <img src={deezerLogo} alt="Ícone do logo do deezer" />
                     </a>
-                    <button type="button">
+                    <button type="button" onClick={() => sendSongToRedux({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
                       <IoMdPlay />
                     </button>
                     <a href="https://google.com" target="_blank" rel="noreferrer">
@@ -77,4 +79,8 @@ const mapStateToProps = (state) => ({
   chart: state.listReducer.chart,
 });
 
-export default connect(mapStateToProps)(SongsSection);
+const mapDispatchToProps = (dispatch) => ({
+  sendSongToRedux: (payload) => dispatch(saveCurrentSong(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongsSection);
