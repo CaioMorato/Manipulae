@@ -27,6 +27,7 @@ const musicReducer = (state = INITIAL_USER_STATE, action) => {
         query: action.query,
         loading: false,
         showChart: false,
+        headers: action.payload.headers,
       };
     case SEARCH_SONGS_LOADING:
       return {

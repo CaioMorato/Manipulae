@@ -22,7 +22,7 @@ export const fetchAPI = () => {
     dispatch(getMusics());
     try {
       const requestMusic = await axios.get('/chart');
-      dispatch(saveTopListened(requestMusic.data));
+      dispatch(saveTopListened(requestMusic));
     } catch (error) {
       dispatch(errorFetching(error));
     }

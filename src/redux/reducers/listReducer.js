@@ -11,7 +11,7 @@ const listReducer = (state = INITIAL_USER_STATE, action) => {
     case TOP_10:
       return {
         ...state,
-        chart: action.payload,
+        chart: action.payload.data,
         loading: false,
       };
     case SET_LOADING:
