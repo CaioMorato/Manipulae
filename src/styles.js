@@ -116,3 +116,20 @@ export const Footer = styled.footer`
     height: 50px;
   }
 `;
+
+export const PaginationUL = styled.ul`
+  display: flex;
+  list-style-type: none;
+  margin: auto;
+  width: max-content;
+
+  li + li {
+    margin-left: 1rem;
+  }
+
+  .current-index {
+    background: none;
+    font-weight: bold;
+    border: none;
+  }
+`;
