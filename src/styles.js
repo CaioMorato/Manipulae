@@ -51,7 +51,7 @@ export const MostPlayedSection = styled.div`
   margin: 20px auto;
   border-radius: 9px;
   font-family: 'Recursive', sans-serif;
-  padding: 8px 6px;
+  padding: 18px 6px;
 `;
 
 export const SectionTitle = styled.h2`
@@ -61,6 +61,8 @@ export const SectionTitle = styled.h2`
 
 export const MostPlayed = styled.div`
   width: 100%;
+  display: flex;
+  flex-flow: row wrap;
 `;
 
 export const SongsDiv = styled.div`

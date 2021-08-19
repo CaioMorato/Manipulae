@@ -8,15 +8,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-.slick-slide {
-  width: 220px !important;
-  height: max-content !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
 ::-webkit-input-placeholder {
   color: black;
 }
