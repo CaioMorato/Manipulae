@@ -7,7 +7,7 @@ import { IoMdPlay } from 'react-icons/io';
 import deezerLogo from '../images/deezer-logo.png';
 // the icon below credits to Pixel Perfect from flaticons.com
 import star from '../images/star.png';
-import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
+import { fetchAPIWithQuery, makeFavorite } from '../redux/actions/changeSongsActions';
 import Pagination from '../helpers/Pagination';
 
 class SongsList extends React.Component {
@@ -15,18 +15,33 @@ class SongsList extends React.Component {
     super();
 
     this.setOffset = this.setOffset.bind(this);
+    this.saveFavorites = this.saveFavorites.bind(this);
 
     this.state = {
       offSet: 0,
+      favorites: [],
     };
   }
 
   setOffset(value) {
     const { fetchSearch, query, quantity } = this.props;
-    this.setState({
+    this.setState((prevState) => ({
+      ...prevState,
       offSet: value,
-    });
+    }));
     fetchSearch({ query, quantity });
+  }
+
+  saveFavorites(music) {
+    const { sendFavoriteToRedux } = this.props;
+
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        favorites: [...prevState.favorites, music],
+      }),
+      () => sendFavoriteToRedux(this.state.favorites)
+    );
   }
 
   render() {
@@ -34,7 +49,6 @@ class SongsList extends React.Component {
     const { offSet } = this.state;
     const LIMITE_PAG = 25;
     const whereToLookAt = showChart ? chart.tracks : search_songs.data;
-    console.log(headers ? headers['content-length'] : null);
     return (
       <>
         <MostPlayed>
@@ -53,9 +67,7 @@ class SongsList extends React.Component {
                 <button type="button" onClick={() => sendSongToRedux({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
                   <IoMdPlay />
                 </button>
-                <a href="https://google.com" target="_blank" rel="noreferrer">
-                  <img src={star} alt="Ícone representando favoritos" />
-                </a>
+                <img src={star} alt="Ícone representando favoritos" onClick={() => this.saveFavorites(music)} />
               </ButtonsDiv>
             </SongsDiv>
           ))}
@@ -78,6 +90,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   sendSongToRedux: (payload) => dispatch(saveCurrentSong(payload)),
   fetchSearch: (payload) => dispatch(fetchAPIWithQuery(payload)),
+  sendFavoriteToRedux: (payload) => dispatch(makeFavorite(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongsList);

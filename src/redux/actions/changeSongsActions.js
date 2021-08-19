@@ -3,6 +3,7 @@ export const CURRENT_SONG = 'CURRENT_SONG';
 export const SEARCH_SONGS_LOADING = 'SEARCH_SONGS_LOADING';
 export const SEARCH_SONGS_SUCCESS = 'SEARCH_SONGS_SUCCESS';
 export const SEARCH_SONGS_FAILED = 'SEARCH_SONGS_FAILED';
+export const FAVORITE_SONG = 'FAVORITE_SONG';
 
 export const saveCurrentSong = (payload) => ({
   type: CURRENT_SONG,
@@ -36,3 +37,8 @@ export const fetchAPIWithQuery = (payload) => {
     }
   };
 };
+
+export const makeFavorite = (payload) => ({
+  type: FAVORITE_SONG,
+  payload,
+});
