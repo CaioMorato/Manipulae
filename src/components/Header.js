@@ -29,7 +29,7 @@ class Header extends React.Component {
     const { searchQuery } = this.state;
 
     if (searchQuery !== '') {
-      fetchSearch(searchQuery);
+      fetchSearch({query: searchQuery, quantity: '0'});
     }
   }
 

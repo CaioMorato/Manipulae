@@ -8,6 +8,7 @@ import deezerLogo from '../images/deezer-logo.png';
 // the icon below credits to Pixel Perfect from flaticons.com
 import star from '../images/star.png';
 import InfiniteScroll from '../helpers/InfiniteScroll';
+import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
 
 class SongsList extends React.Component {
   render() {
@@ -16,6 +17,9 @@ class SongsList extends React.Component {
       search_songs,
       sendSongToRedux,
       showChart,
+      fetchSearch,
+      query,
+      quantity,
     } = this.props;
     let whereToLookAt = showChart ? tracks : search_songs.data;
     return (
@@ -41,7 +45,7 @@ class SongsList extends React.Component {
             </ButtonsDiv>
           </SongsDiv>
         ))}
-        {whereToLookAt === search_songs.data ? <InfiniteScroll fetchMore={() => console.log('apareceu na tela')} /> : null}
+        {whereToLookAt === search_songs.data ? <InfiniteScroll fetchMore={() => fetchSearch({ query, quantity })} /> : null}
       </MostPlayed>
     );
   }
@@ -52,10 +56,12 @@ const mapStateToProps = (state) => ({
   showChart: state.musicReducer.showChart,
   search_songs: state.musicReducer.search_songs,
   quantity: state.musicReducer.quantity,
+  query: state.musicReducer.query,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   sendSongToRedux: (payload) => dispatch(saveCurrentSong(payload)),
+  fetchSearch: (payload) => dispatch(fetchAPIWithQuery(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongsList);

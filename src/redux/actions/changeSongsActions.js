@@ -13,9 +13,11 @@ export const getSearchMusics = () => ({
   type: SEARCH_SONGS_LOADING,
 });
 
-export const saveSearchMusics = (payload) => ({
+export const saveSearchMusics = (payload, quantity, query) => ({
   type: SEARCH_SONGS_SUCCESS,
   payload,
+  quantity,
+  query,
 });
 
 export const errorFetching = (payload) => ({
@@ -23,12 +25,13 @@ export const errorFetching = (payload) => ({
   payload,
 });
 
-export const fetchAPIWithQuery = (query) => {
+export const fetchAPIWithQuery = (payload) => {
   return async (dispatch) => {
     dispatch(getSearchMusics());
     try {
-      const requestMusic = await axios.get(`/search?q=${query}&index=0`);
-      dispatch(saveSearchMusics(requestMusic));
+      const requestMusic = await axios.get(`/search?q=${payload.query}&index=${payload.quantity}`);
+      dispatch(saveSearchMusics(requestMusic, payload.quantity, payload.query));
+      console.log(payload.quantity)
     } catch (error) {
       dispatch(errorFetching(error));
     }
