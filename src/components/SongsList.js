@@ -64,7 +64,7 @@ class SongsList extends React.Component {
                 <a href={music.link} target="_blank" rel="noreferrer">
                   <img src={deezerLogo} alt="Ícone do logo do deezer" />
                 </a>
-                <button type="button" onClick={() => sendSongToRedux({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
+                <button type="button" onClick={() => sendSongToRedux(music)}>
                   <IoMdPlay />
                 </button>
                 <img src={star} alt="Ícone representando favoritos" onClick={() => this.saveFavorites(music)} />

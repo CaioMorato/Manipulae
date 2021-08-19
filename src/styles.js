@@ -108,13 +108,21 @@ export const ButtonsDiv = styled.div`
 export const Footer = styled.footer`
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
   border: 1px black solid;
+  align-items: center;
+  height: 75px;
+  background-color: #828a9b;
   > img {
     margin: 0;
     width: 50px;
     height: 50px;
   }
+`;
+
+export const ProgressBarDiv = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 40%;
 `;
 
 export const PaginationUL = styled.ul`

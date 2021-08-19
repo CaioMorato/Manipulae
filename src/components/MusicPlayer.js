@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Footer } from '../styles';
+import { Footer, ProgressBarDiv } from '../styles';
 
 class MusicPlayer extends React.Component {
   constructor() {
@@ -30,18 +30,20 @@ class MusicPlayer extends React.Component {
   }
 
   render() {
-    const { current_song_cover, current_song } = this.props;
+    const { music_preview } = this.props;
     const { songState } = this.state;
     return (
       <Footer>
-        <img src={current_song_cover} alt="Capa da música que está tocando agora" />
-        <div>
-          <audio src={current_song} ref={this.audioPlayer} />
+        <img src={music_preview.album.cover_small} alt="Capa da música que está tocando agora" />
+        <ProgressBarDiv>
+          <audio src={music_preview.preview} ref={this.audioPlayer} />
           <button type="button" onClick={this.changeSongState}>
             {songState}
           </button>
+          <div>00:00</div>
           <input type="range" />
-        </div>
+          <div>02:47</div>
+        </ProgressBarDiv>
         <div>Adicionar aos favoritos</div>
       </Footer>
     );
@@ -49,8 +51,7 @@ class MusicPlayer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  current_song: state.musicReducer.current_song,
-  current_song_cover: state.musicReducer.current_song_cover,
+  music_preview: state.musicReducer.music_preview,
 });
 
 export default connect(mapStateToProps)(MusicPlayer);
