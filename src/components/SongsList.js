@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { SongsDiv, ButtonsDiv, MostPlayed } from '../styles';
 import { saveCurrentSong } from '../redux/actions/changeSongsActions';
+
 import { IoMdPlay } from 'react-icons/io';
 // the icon below credits to Freepik from flaticons.com
 import deezerLogo from '../images/deezer-logo.png';
@@ -17,7 +18,6 @@ class SongsList extends React.Component {
       showChart,
     } = this.props;
     let whereToLookAt = showChart ? tracks : search_songs.data;
-    console.log(whereToLookAt);
     return (
       <MostPlayed>
         {whereToLookAt.data.map((music) => (

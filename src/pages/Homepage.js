@@ -35,7 +35,7 @@ class Homepage extends React.Component {
     const { searchQuery, fetchSearch } = this.props;
 
     if (searchQuery !== '') {
-      fetchSearch('eminem');
+      fetchSearch(searchQuery);
     }
   }
 
