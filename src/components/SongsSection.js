@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { saveCurrentSong } from '../redux/actions/index';
+import { saveCurrentSong } from '../redux/actions/changeSongsActions';
 import { MostPlayed, SongsDiv, MostPlayedSection, ButtonsDiv } from '../styles';
 import { SectionTitle } from '../styles';
 import Slider from 'react-slick';
@@ -23,6 +23,7 @@ class SongsSection extends React.Component {
       return <span>Loading...</span>;
     }
   }
+
 
   render() {
     const {

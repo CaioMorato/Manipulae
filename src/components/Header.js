@@ -5,7 +5,7 @@ import profile from '../images/profile.png';
 
 class Header extends React.Component {
   render() {
-    const { handleChange } = this.props;
+    const { handleChange, fetchSongsByQuery } = this.props;
     return (
       <SearchHeader>
         <HeaderDiv>
@@ -14,6 +14,9 @@ class Header extends React.Component {
         <SearchInputContainer>
           <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="" />
           <SearchInput type="text" placeholder="Pesquise por nome de música, artista ou álbum" onChange={handleChange} />
+          <button type="button" onClick={() => fetchSongsByQuery()}>
+            Pesquisar
+          </button>
         </SearchInputContainer>
         <AccountDiv>
           <img src={profile} alt="Foto de perfil" />
