@@ -1,8 +1,8 @@
 import { FETCH_ERROR, SET_LOADING, TOP_10 } from '../actions/firstFetchActions';
 
 const INITIAL_USER_STATE = {
-  chart: {},
   loading: true,
+  chart: {},
   error: {},
 };
 

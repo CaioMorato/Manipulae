@@ -1,11 +1,12 @@
 import { CURRENT_SONG, SEARCH_SONGS_LOADING, SEARCH_SONGS_SUCCESS, SEARCH_SONGS_FAILED } from '../actions/changeSongsActions';
 
 const INITIAL_USER_STATE = {
+  showChart: true,
+  loading: false,
+  search_songs: {},
   current_song: '',
   current_song_cover: 'https://www.kindpng.com/picc/m/130-1306421_vinyl-record-png-vinyl-png-transparent-png.png',
-  search_songs: {},
-  loading: false,
-  error: {}
+  error: {},
 };
 
 const musicReducer = (state = INITIAL_USER_STATE, action) => {
@@ -21,6 +22,7 @@ const musicReducer = (state = INITIAL_USER_STATE, action) => {
         ...state,
         search_songs: action.payload,
         loading: false,
+        showChart: false,
       };
     case SEARCH_SONGS_LOADING:
       return {
