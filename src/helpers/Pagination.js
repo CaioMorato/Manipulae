@@ -15,9 +15,7 @@ class Pagination extends React.Component {
           .map((_, index) => index + firstButton)
           .map((page) => (
             <li>
-              <button type="button" onClick={() => setOffset((page - 1) * limit)}
-                className={page === current ? 'current-index' : null}
-              >
+              <button type="button" onClick={() => setOffset((page - 1) * limit)} className={page === current ? 'current-index' : null}>
                 {page}
               </button>
             </li>

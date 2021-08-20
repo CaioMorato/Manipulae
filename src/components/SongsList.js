@@ -1,15 +1,18 @@
+// vitals
 import React from 'react';
 import { connect } from 'react-redux';
-import { SongsDiv, ButtonsDiv, MostPlayed } from '../styles';
-import { saveCurrentSong } from '../redux/actions/changeSongsActions';
+import PropTypes from 'prop-types';
+// components
+import Pagination from '../helpers/Pagination';
+// redux
+import { fetchAPIWithQuery, makeFavorite, saveCurrentSong } from '../redux/actions/changeSongsActions';
+// styles
+import { MostPlayedSection } from '../SongsSectionStyles';
+import { SongsDiv, ButtonsDiv, MostPlayed } from '../SongsListStyles';
 import { IoMdPlay } from 'react-icons/io';
+import { MdFavoriteBorder } from 'react-icons/md';
 // the icon below credits to Freepik from flaticons.com
 import deezerLogo from '../images/deezer-logo.png';
-// the icon below credits to Pixel Perfect from flaticons.com
-import { MdFavoriteBorder } from 'react-icons/md';
-import { fetchAPIWithQuery, makeFavorite } from '../redux/actions/changeSongsActions';
-import Pagination from '../helpers/Pagination';
-import MusicPlayer from '../components/MusicPlayer';
 
 class SongsList extends React.Component {
   constructor() {
@@ -17,6 +20,7 @@ class SongsList extends React.Component {
 
     this.setOffset = this.setOffset.bind(this);
     this.saveFavorites = this.saveFavorites.bind(this);
+    this.convertTime = this.convertTime.bind(this);
 
     this.state = {
       offSet: 0,
@@ -35,7 +39,6 @@ class SongsList extends React.Component {
 
   saveFavorites(music) {
     const { sendFavoriteToRedux } = this.props;
-
     this.setState(
       (prevState) => ({
         ...prevState,
@@ -45,22 +48,29 @@ class SongsList extends React.Component {
     );
   }
 
+  convertTime(durationInSeconds) {
+    const MINUTES = Math.floor(durationInSeconds / 60);
+    const SECONDS = Math.ceil(durationInSeconds - MINUTES * 60);
+    // if SECONDS is lower than 9 we add a 0 to turn the number into the right format x:xx
+    return `${MINUTES}:${SECONDS > 9 ? SECONDS : '0' + SECONDS}`;
+  }
+
   render() {
     const { chart, search_songs, sendSongToRedux, showChart, headers } = this.props;
     const { offSet } = this.state;
     const LIMITE_PAG = 25;
-    const whereToLookAt = showChart ? chart.tracks : search_songs.data;
+    // If we want to render the top chart showCart will be true so we will read chart.tracks array.
+    // If showCart is false we will get search_songs.data array
+    const whichListToRender = showChart ? chart.tracks : search_songs.data;
     return (
-      <>
+      <MostPlayedSection>
         <MostPlayed>
-          {whereToLookAt.data.map((music) => (
+          {whichListToRender.data.map((music) => (
             <SongsDiv key={music.id}>
               <h4>{music.title || music.name}</h4>
-              <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} width="190px" />
-              <div>
-                <p>{music.artist.name}</p>
-                <h5>{(music.duration / 60).toFixed(2).replace('.', ':')}</h5>
-              </div>
+              <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} />
+              <p>{music.artist.name}</p>
+              <h5>{this.convertTime(music.duration)}</h5>
               <ButtonsDiv>
                 <a href={music.link} target="_blank" rel="noreferrer">
                   <img src={deezerLogo} alt="Ícone do logo do deezer" />
@@ -68,14 +78,13 @@ class SongsList extends React.Component {
                 <button type="button" onClick={() => sendSongToRedux(music)}>
                   <IoMdPlay />
                 </button>
-                <MdFavoriteBorder size={20} onClick={() => this.saveFavorites(music)} />
+                <MdFavoriteBorder className="react-fav-icon" size={20} onClick={() => this.saveFavorites(music)} />
               </ButtonsDiv>
             </SongsDiv>
           ))}
-          <MusicPlayer />
         </MostPlayed>
         {!showChart && <Pagination limit={LIMITE_PAG} total={headers ? headers['content-length'] : 1} offset={offSet} setOffset={this.setOffset} />}
-      </>
+      </MostPlayedSection>
     );
   }
 }
@@ -94,5 +103,17 @@ const mapDispatchToProps = (dispatch) => ({
   fetchSearch: (payload) => dispatch(fetchAPIWithQuery(payload)),
   sendFavoriteToRedux: (payload) => dispatch(makeFavorite(payload)),
 });
+
+SongsList.propTypes = {
+  chart: PropTypes.objectOf(Object),
+  showChart: PropTypes.bool,
+  search_songs: PropTypes.objectOf(Object),
+  quantity: PropTypes.number,
+  query: PropTypes.string,
+  headers: PropTypes.objectOf(Object),
+  sendSongToRedux: PropTypes.func,
+  fetchSearch: PropTypes.func,
+  sendFavoriteToRedux: PropTypes.func,
+}.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongsList);

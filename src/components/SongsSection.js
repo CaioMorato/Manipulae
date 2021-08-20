@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // components
 import SongsList from './SongsList';
+import MusicPlayer from './MusicPlayer';
 // styles
-import { MostPlayedSection, Loading, PageTitle } from '../styles';
+import { Loading, PageTitle } from '../SongsSectionStyles';
 
 class SongsSection extends React.Component {
   constructor() {
@@ -26,7 +27,8 @@ class SongsSection extends React.Component {
     return (
       <>
         <PageTitle>{showChart ? 'Top 10 músicas mais ouvidas' : `Buscas relacionadas a '${query}'`}</PageTitle>
-        <MostPlayedSection>{this.renderLoading() || <SongsList />}</MostPlayedSection>
+        {this.renderLoading() || <SongsList />}
+        <MusicPlayer />
       </>
     );
   }

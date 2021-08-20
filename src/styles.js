@@ -1,68 +1,5 @@
 import styled from 'styled-components';
 
-export const Loading = styled.p`
-  text-align: center;
-  font-size: larger;
-`;
-
-export const PageTitle = styled.h1`
-  text-align: center;
-  margin: 23px auto;
-  font-family: 'Recursive', sans-serif;
-`;
-
-export const MostPlayedSection = styled.div`
-  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);
-  background-color: white;
-  border-radius: 9px;
-  font-family: 'Recursive', sans-serif;
-  height: 113vh;
-`;
-
-export const MostPlayed = styled.div`
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-`;
-
-export const SongsDiv = styled.div`
-  border-radius: 8px;
-  padding: 5px;
-  box-shadow: -2px 2px 5px 3px rgba(0, 0, 0, 0.2);
-  margin: auto auto 20px;
-  > div {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  > h4,
-  p {
-    text-align: center;
-  }
-`;
-
-export const ButtonsDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around !important  ;
-
-  > button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    border-radius: 20px;
-    height: 20px;
-    background-color: white;
-    outline: none;
-    border: 1px black solid;
-  }
-
-  > button:hover {
-    cursor: pointer;
-    transform: scale(1.04);
-  }
-`;
 
 export const Footer = styled.footer`
   display: flex;
@@ -70,7 +7,7 @@ export const Footer = styled.footer`
   align-items: center;
   background-color: #fff;
   position: fixed;
-  width: 99vw;
+  width: 100%;
   height: 13vh;
   top: 87vh;
   box-shadow: 1px 1px 11px 2px rgba(0, 0, 0, 0.2);
@@ -113,6 +50,7 @@ export const Footer = styled.footer`
     -webkit-appearance: none;
     margin-top: -3.6px;
   }
+  
   .react-fav-icon:hover {
     color: red;
     cursor: pointer;
