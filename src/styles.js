@@ -4,9 +4,13 @@ export const SearchHeader = styled.header`
   display: flex;
   justify-content: space-around;
   font-family: 'Roboto', sans-serif;
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
-export const HeaderDiv = styled.div`
+export const HeaderImgDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
