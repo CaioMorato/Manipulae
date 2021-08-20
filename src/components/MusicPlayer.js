@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Footer, ProgressBarDiv } from '../styles';
+import { ImPlay2, ImPause2 } from 'react-icons/im';
+import { MdFavorite } from 'react-icons/md';
 
 class MusicPlayer extends React.Component {
   constructor() {
@@ -49,12 +51,12 @@ class MusicPlayer extends React.Component {
 
     return (
       <Footer>
-        <img src={music_preview.album.cover_small} alt="Capa da música que está tocando agora" />
-        <ProgressBarDiv>
+        <div>
           <audio src={music_preview.preview} ref={this.audioPlayer} />
-          <button type="button" onClick={this.changeSongState}>
-            {isPlaying ? 'Pause' : 'Play'}
-          </button>
+          <img src={music_preview.album.cover_small} alt="Capa da música que está tocando agora" />
+        </div>
+        <div>{isPlaying ? <ImPause2 size={30} onClick={this.changeSongState} color="black" /> : <ImPlay2 size={30} onClick={this.changeSongState} color="black" />}</div>
+        <ProgressBarDiv>
           <input
             type="range"
             defaultValue={previewDefaultValue}
@@ -63,9 +65,10 @@ class MusicPlayer extends React.Component {
               this.slideBar();
             }}
             ref={this.progressBar}
+            className="slider"
           />
         </ProgressBarDiv>
-        <div>Adicionar aos favoritos</div>
+        <MdFavorite className="react-fav-icon" size={40} />
       </Footer>
     );
   }
