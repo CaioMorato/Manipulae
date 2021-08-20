@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
-import { SearchHeader, SearchInput, SearchInputContainer, HeaderImgDiv, AccountDiv } from '../styles';
+import { SearchHeader, SearchInput, SearchInputContainer, HeaderImgDiv, AccountDiv } from '../HeaderStyles';
 // this picture below credits to Freepik from Flaticon.com
 import profile from '../images/profile.png';
 
@@ -37,7 +37,9 @@ class Header extends React.Component {
     return (
       <SearchHeader>
         <HeaderImgDiv>
-          <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="Logo da minha futura empresa querida" />
+          <a href="https://manipulae.com.br/" target="_blank" rel="noreferrer">
+            <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="Logo da minha futura empresa querida" />
+          </a>
         </HeaderImgDiv>
         <SearchInputContainer>
           <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="" />
