@@ -1,18 +1,22 @@
 import styled from 'styled-components';
 
-
-export const MostPlayedSection = styled.div`
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-  margin: 20px auto;
-  border-radius: 9px;
-  font-family: 'Recursive', sans-serif;
-  padding: 18px 6px;
-  height: 113vh;
+export const Loading = styled.p`
+  text-align: center;
+  font-size: larger;
 `;
 
-export const SectionTitle = styled.h2`
+export const PageTitle = styled.h1`
   text-align: center;
-  margin: 10px auto;
+  margin: 23px auto;
+  font-family: 'Recursive', sans-serif;
+`;
+
+export const MostPlayedSection = styled.div`
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 9px;
+  font-family: 'Recursive', sans-serif;
+  height: 113vh;
 `;
 
 export const MostPlayed = styled.div`
