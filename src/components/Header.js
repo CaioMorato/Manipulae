@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
 import { SearchHeader, SearchInput, SearchInputContainer, HeaderDiv, AccountDiv } from '../styles';
 // this picture below credits to Freepik from Flaticon.com
 import profile from '../images/profile.png';
-import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
 
 class Header extends React.Component {
   constructor() {
@@ -29,7 +30,7 @@ class Header extends React.Component {
     const { searchQuery } = this.state;
 
     if (searchQuery !== '') {
-      fetchSearch({query: searchQuery, quantity: '0'});
+      fetchSearch({ query: searchQuery, quantity: '0' });
     }
   }
 
@@ -58,5 +59,9 @@ class Header extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   fetchSearch: (payload) => dispatch(fetchAPIWithQuery(payload)),
 });
+
+Header.propTypes = {
+  fetchSearch: PropTypes.func,
+}.isRequired;
 
 export default connect(null, mapDispatchToProps)(Header);
