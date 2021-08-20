@@ -1,11 +1,14 @@
+// vitals
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// redux
 import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
+// styles
 import { SearchHeader, SearchInput, SearchInputContainer, HeaderImgDiv, AccountDiv } from '../HeaderStyles';
 // this picture below credits to Freepik from Flaticon.com
-import profile from '../images/profile.png';
+import avatar from '../images/avatar.png';
 
 class Header extends React.Component {
   constructor() {
@@ -50,7 +53,7 @@ class Header extends React.Component {
         </SearchInputContainer>
         <Link to="/MyLibrary">
           <AccountDiv>
-            <img src={profile} alt="Foto de perfil" />
+            <img src={avatar} alt="Foto de perfil" />
             <p>Minhas Favoritas</p>
           </AccountDiv>
         </Link>
