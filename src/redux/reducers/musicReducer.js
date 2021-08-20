@@ -6,9 +6,13 @@ const INITIAL_USER_STATE = {
   search_songs: {},
   quantity: 0,
   query: '',
-  current_song: '',
+  music_preview: {
+    duration: 0,
+    album: {
+      cover_small: 'https://i.pinimg.com/736x/3f/97/38/3f973871057b3f076e38f5c1413b06e6.jpg',
+    },
+  },
   favorites: [],
-  current_song_cover: 'https://www.kindpng.com/picc/m/130-1306421_vinyl-record-png-vinyl-png-transparent-png.png',
   error: {},
 };
 
@@ -17,8 +21,7 @@ const musicReducer = (state = INITIAL_USER_STATE, action) => {
     case CURRENT_SONG:
       return {
         ...state,
-        current_song: action.payload.current_song,
-        current_song_cover: action.payload.current_song_cover,
+        music_preview: action.payload,
       };
     case SEARCH_SONGS_SUCCESS:
       return {

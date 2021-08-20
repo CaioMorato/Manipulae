@@ -17,7 +17,6 @@ class Homepage extends React.Component {
         <Header />
         <main>
           <SongsSection />
-          <MusicPlayer />
         </main>
       </>
     );

@@ -1,56 +1,81 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Footer } from '../styles';
+import { Footer, ProgressBarDiv } from '../styles';
+import { ImPlay2, ImPause2 } from 'react-icons/im';
+import { MdFavorite } from 'react-icons/md';
 
 class MusicPlayer extends React.Component {
   constructor() {
     super();
 
     this.changeSongState = this.changeSongState.bind(this);
+    this.slideBar = this.slideBar.bind(this);
     this.audioPlayer = React.createRef();
+    this.progressBar = React.createRef();
 
     this.state = {
-      songState: 'Play',
+      isPlaying: false,
     };
   }
 
   changeSongState() {
-    let { songState } = this.state;
-    if (songState === 'Play') {
+    let { isPlaying } = this.state;
+    const ONE_SECOND = 1000;
+    if (!isPlaying) {
       this.setState({
-        songState: 'Pause',
+        isPlaying: true,
       });
       this.audioPlayer.current.play();
     } else {
       this.setState({
-        songState: 'Play',
+        isPlaying: false,
       });
       this.audioPlayer.current.pause();
     }
+
+    setInterval(() => {
+      this.progressBar.current.value = this.audioPlayer.current.currentTime;
+    }, ONE_SECOND);
+  }
+
+  slideBar() {
+    this.audioPlayer.current.currentTime = this.progressBar.current.value;
   }
 
   render() {
-    const { current_song_cover, current_song } = this.props;
-    const { songState } = this.state;
+    const { music_preview } = this.props;
+    const { isPlaying } = this.state;
+
+    const previewDuration = music_preview.preview ? this.audioPlayer.current.duration : 100;
+    const previewDefaultValue = music_preview.preview ? this.audioPlayer.current.duration : 0;
+
     return (
       <Footer>
-        <img src={current_song_cover} alt="Capa da música que está tocando agora" />
         <div>
-          <audio src={current_song} ref={this.audioPlayer} />
-          <button type="button" onClick={this.changeSongState}>
-            {songState}
-          </button>
-          <input type="range" />
+          <audio src={music_preview.preview} ref={this.audioPlayer} />
+          <img src={music_preview.album.cover_small} alt="Capa da música que está tocando agora" />
         </div>
-        <div>Adicionar aos favoritos</div>
+        <div>{isPlaying ? <ImPause2 size={30} onClick={this.changeSongState} color="black" /> : <ImPlay2 size={30} onClick={this.changeSongState} color="black" />}</div>
+        <ProgressBarDiv>
+          <input
+            type="range"
+            defaultValue={previewDefaultValue}
+            max={previewDuration}
+            onChange={() => {
+              this.slideBar();
+            }}
+            ref={this.progressBar}
+            className="slider"
+          />
+        </ProgressBarDiv>
+        <MdFavorite className="react-fav-icon" size={40} />
       </Footer>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  current_song: state.musicReducer.current_song,
-  current_song_cover: state.musicReducer.current_song_cover,
+  music_preview: state.musicReducer.music_preview,
 });
 
 export default connect(mapStateToProps)(MusicPlayer);

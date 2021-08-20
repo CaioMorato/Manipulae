@@ -6,9 +6,10 @@ import { IoMdPlay } from 'react-icons/io';
 // the icon below credits to Freepik from flaticons.com
 import deezerLogo from '../images/deezer-logo.png';
 // the icon below credits to Pixel Perfect from flaticons.com
-import star from '../images/star.png';
+import { MdFavoriteBorder } from 'react-icons/md';
 import { fetchAPIWithQuery, makeFavorite } from '../redux/actions/changeSongsActions';
 import Pagination from '../helpers/Pagination';
+import MusicPlayer from '../components/MusicPlayer';
 
 class SongsList extends React.Component {
   constructor() {
@@ -64,13 +65,14 @@ class SongsList extends React.Component {
                 <a href={music.link} target="_blank" rel="noreferrer">
                   <img src={deezerLogo} alt="Ícone do logo do deezer" />
                 </a>
-                <button type="button" onClick={() => sendSongToRedux({ current_song: music.preview, current_song_cover: music.album.cover_small })}>
+                <button type="button" onClick={() => sendSongToRedux(music)}>
                   <IoMdPlay />
                 </button>
-                <img src={star} alt="Ícone representando favoritos" onClick={() => this.saveFavorites(music)} />
+                <MdFavoriteBorder size={20} onClick={() => this.saveFavorites(music)} />
               </ButtonsDiv>
             </SongsDiv>
           ))}
+          <MusicPlayer />
         </MostPlayed>
         {!showChart && <Pagination limit={LIMITE_PAG} total={headers ? headers['content-length'] : 1} offset={offSet} setOffset={this.setOffset} />}
       </>

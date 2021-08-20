@@ -18,10 +18,12 @@ class SongsSection extends React.Component {
 
   render() {
     return (
-      <MostPlayedSection>
-        <SectionTitle>Músicas mais ouvidas:</SectionTitle>
-        {this.loadingGenerator() || <SongsList />}
-      </MostPlayedSection>
+      <>
+        <MostPlayedSection>
+          <SectionTitle>Músicas mais ouvidas:</SectionTitle>
+          {this.loadingGenerator() || <SongsList />}
+        </MostPlayedSection>
+      </>
     );
   }
 }
