@@ -7,6 +7,7 @@ const INITIAL_USER_STATE = {
   quantity: 0,
   query: '',
   music_preview: {
+    duration: 0,
     album: {
       cover_small: 'https://i.pinimg.com/736x/3f/97/38/3f973871057b3f076e38f5c1413b06e6.jpg',
     },

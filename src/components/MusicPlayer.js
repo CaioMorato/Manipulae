@@ -7,42 +7,63 @@ class MusicPlayer extends React.Component {
     super();
 
     this.changeSongState = this.changeSongState.bind(this);
+    this.slideBar = this.slideBar.bind(this);
     this.audioPlayer = React.createRef();
+    this.progressBar = React.createRef();
 
     this.state = {
-      songState: 'Play',
+      isPlaying: false,
     };
   }
 
   changeSongState() {
-    let { songState } = this.state;
-    if (songState === 'Play') {
+    let { isPlaying } = this.state;
+    const ONE_SECOND = 1000;
+    if (!isPlaying) {
       this.setState({
-        songState: 'Pause',
+        isPlaying: true,
       });
       this.audioPlayer.current.play();
     } else {
       this.setState({
-        songState: 'Play',
+        isPlaying: false,
       });
       this.audioPlayer.current.pause();
     }
+
+    setInterval(() => {
+      this.progressBar.current.value = this.audioPlayer.current.currentTime;
+    }, ONE_SECOND);
+  }
+
+  slideBar() {
+    this.audioPlayer.current.currentTime = this.progressBar.current.value;
   }
 
   render() {
     const { music_preview } = this.props;
-    const { songState } = this.state;
+    const { isPlaying } = this.state;
+
+    const previewDuration = music_preview.preview ? this.audioPlayer.current.duration : 100;
+    const previewDefaultValue = music_preview.preview ? this.audioPlayer.current.duration : 0;
+
     return (
       <Footer>
         <img src={music_preview.album.cover_small} alt="Capa da música que está tocando agora" />
         <ProgressBarDiv>
           <audio src={music_preview.preview} ref={this.audioPlayer} />
           <button type="button" onClick={this.changeSongState}>
-            {songState}
+            {isPlaying ? 'Pause' : 'Play'}
           </button>
-          <div>00:00</div>
-          <input type="range" />
-          <div>02:47</div>
+          <input
+            type="range"
+            defaultValue={previewDefaultValue}
+            max={previewDuration}
+            onChange={() => {
+              this.slideBar();
+            }}
+            ref={this.progressBar}
+          />
         </ProgressBarDiv>
         <div>Adicionar aos favoritos</div>
       </Footer>
