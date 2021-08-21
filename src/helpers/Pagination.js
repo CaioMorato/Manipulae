@@ -1,6 +1,8 @@
+// vitals
 import React from 'react';
-import { PaginationUL, PaginationLI } from '../styles';
 import PropTypes from 'prop-types';
+// styles
+import { PaginationUL, PaginationLI } from '../PaginationStyles';
 
 class Pagination extends React.Component {
   render() {

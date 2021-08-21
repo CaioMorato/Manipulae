@@ -1,10 +1,13 @@
+// vitals
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Footer, ProgressBarDiv } from '../styles';
-import { ImPlay2, ImPause2 } from 'react-icons/im';
-import { MdFavorite } from 'react-icons/md';
+// redux
 import { makeFavorite } from '../redux/actions/changeSongsActions';
+// styles
+import { MdFavorite } from 'react-icons/md';
+import { ImPlay2, ImPause2 } from 'react-icons/im';
+import { Footer, ProgressBarDiv } from '../MusicPlayerStyles';
 
 class MusicPlayer extends React.Component {
   constructor() {

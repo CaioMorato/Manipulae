@@ -1,7 +1,9 @@
+// vitals
 import React from 'react';
 import { Link } from 'react-router-dom';
+// styles
 import { PageTitle } from '../SongsSectionStyles';
-import { NotFoundDIV } from '../styles';
+import { NotFoundDIV } from '../NotFoundStyles';
 
 class NotFound extends React.Component {
   render() {

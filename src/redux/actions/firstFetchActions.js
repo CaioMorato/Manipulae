@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const TOP_10 = 'TOP_10';
 export const SET_LOADING = 'SET_LOADING';
 export const FETCH_ERROR = 'FETCH_ERROR';

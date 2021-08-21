@@ -1,17 +1,20 @@
+// vitals
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { MostPlayedSection, Loading } from '../SongsSectionStyles';
-import { SongsDiv, ButtonsDiv, MostPlayed } from '../SongsListStyles';
-import { resetFavorites, saveCurrentSong } from '../redux/actions/changeSongsActions';
-import MusicPlayer from '../components/MusicPlayer';
-
-import { PageTitle } from '../SongsSectionStyles';
+// components
 import Header from '../components/Header';
+import MusicPlayer from '../components/MusicPlayer';
+// redux
+import { resetFavorites, saveCurrentSong } from '../redux/actions/changeSongsActions';
+// styles
+import { IoMdPlay } from 'react-icons/io';
+import { ImHeartBroken } from 'react-icons/im';
+import { PageTitle } from '../SongsSectionStyles';
 // the icon below credits to Freepik from flaticons.com
 import deezerLogo from '../images/deezer-logo.png';
-import { ImHeartBroken } from 'react-icons/im';
-import { IoMdPlay } from 'react-icons/io';
+import { SongsDiv, ButtonsDiv, MostPlayed } from '../SongsListStyles';
+import { MostPlayedSection, Loading } from '../SongsSectionStyles';
 
 class MyLibrary extends React.Component {
   constructor() {
