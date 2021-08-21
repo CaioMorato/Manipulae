@@ -99,3 +99,12 @@ export const PaginationLI = styled.li`
     font-size: 20px;
   }
 `;
+
+export const NotFoundDIV = styled.div`
+  text-align: center;
+
+  > a {
+    font-size: x-large;
+    color: black;
+  }
+`;
