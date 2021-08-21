@@ -1,5 +1,8 @@
+// vitals
 import React from 'react';
-import { PaginationUL } from '../styles';
+import PropTypes from 'prop-types';
+// styles
+import { PaginationUL, PaginationLI } from '../PaginationStyles';
 
 class Pagination extends React.Component {
   render() {
@@ -14,17 +17,22 @@ class Pagination extends React.Component {
         {Array.from({ length: Math.min(MAX_BUTTONS, pages) })
           .map((_, index) => index + firstButton)
           .map((page) => (
-            <li>
-              <button type="button" onClick={() => setOffset((page - 1) * limit)}
-                className={page === current ? 'current-index' : null}
-              >
+            <PaginationLI>
+              <button type="button" onClick={() => setOffset((page - 1) * limit)} className={page === current ? 'current-index' : null}>
                 {page}
               </button>
-            </li>
+            </PaginationLI>
           ))}
       </PaginationUL>
     );
   }
 }
+
+Pagination.propTypes = {
+  limit: PropTypes.number,
+  total: PropTypes.number,
+  offset: PropTypes.numer,
+  setOffset: PropTypes.func,
+}.isRequired;
 
 export default Pagination;

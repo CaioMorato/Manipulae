@@ -6,7 +6,7 @@ const INITIAL_USER_STATE = {
   error: {},
 };
 
-const listReducer = (state = INITIAL_USER_STATE, action) => {
+const topChartReducer = (state = INITIAL_USER_STATE, action) => {
   switch (action.type) {
     case TOP_10:
       return {
@@ -29,4 +29,4 @@ const listReducer = (state = INITIAL_USER_STATE, action) => {
   }
 };
 
-export default listReducer;
+export default topChartReducer;

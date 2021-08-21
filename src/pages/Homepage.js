@@ -1,30 +1,35 @@
+// vitals
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// components
 import Header from '../components/Header';
 import SongsSection from '../components/SongsSection';
-import MusicPlayer from '../components/MusicPlayer';
+// redux
 import { fetchAPI } from '../redux/actions/firstFetchActions';
 
 class Homepage extends React.Component {
   componentDidMount() {
-    const { firstFetch } = this.props;
-    firstFetch();
+    const { topChartFetch } = this.props;
+    topChartFetch();
   }
 
   render() {
     return (
       <>
         <Header />
-        <main>
-          <SongsSection />
-        </main>
+        <SongsSection />
       </>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  firstFetch: () => dispatch(fetchAPI()),
+  topChartFetch: () => dispatch(fetchAPI()),
 });
+
+Homepage.propTypes = {
+  topChartFetch: PropTypes.func,
+}.isRequired;
 
 export default connect(null, mapDispatchToProps)(Homepage);

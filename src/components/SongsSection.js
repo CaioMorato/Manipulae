@@ -1,35 +1,49 @@
+// vitals
 import React from 'react';
 import { connect } from 'react-redux';
-import { MostPlayedSection } from '../styles';
-import { SectionTitle } from '../styles';
+import PropTypes from 'prop-types';
+// components
 import SongsList from './SongsList';
+import MusicPlayer from './MusicPlayer';
+// styles
+import { Loading, PageTitle } from '../SongsSectionStyles';
+
 class SongsSection extends React.Component {
   constructor() {
     super();
-    this.loadingGenerator = this.loadingGenerator.bind(this);
+
+    this.loadingGenerator = this.renderLoading.bind(this);
   }
 
-  loadingGenerator() {
+  renderLoading() {
     const { loading } = this.props;
     if (loading) {
-      return <span>Loading...</span>;
+      return <Loading fontSize="40px">Carregando as melhores músicas pra você</Loading>;
     }
   }
 
   render() {
+    const { showChart, query } = this.props;
     return (
       <>
-        <MostPlayedSection>
-          <SectionTitle>Músicas mais ouvidas:</SectionTitle>
-          {this.loadingGenerator() || <SongsList />}
-        </MostPlayedSection>
+        <PageTitle>{showChart ? 'Top 10 músicas mais ouvidas' : `Buscas relacionadas a '${query}'`}</PageTitle>
+        {this.renderLoading() || <SongsList />}
+        <MusicPlayer />
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.listReducer.loading,
+const mapStateToProps = ({ topChartReducer, musicReducer }) => ({
+  loading: topChartReducer.loading,
+  showChart: musicReducer.showChart,
+  query: musicReducer.query,
 });
+
+SongsSection.propTypes = {
+  loading: PropTypes.bool,
+  showChart: PropTypes.bool,
+  query: PropTypes.string,
+}.isRequired;
 
 export default connect(mapStateToProps)(SongsSection);

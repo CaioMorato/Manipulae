@@ -1,9 +1,14 @@
+// vitals
 import React from 'react';
 import { connect } from 'react-redux';
-import { SearchHeader, SearchInput, SearchInputContainer, HeaderDiv, AccountDiv } from '../styles';
-// this picture below credits to Freepik from Flaticon.com
-import profile from '../images/profile.png';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+// redux
 import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
+// styles
+import { SearchHeader, SearchInput, SearchInputContainer, HeaderImgDiv, AccountDiv } from '../HeaderStyles';
+// this picture below credits to Freepik from Flaticon.com
+import avatar from '../images/avatar.png';
 
 class Header extends React.Component {
   constructor() {
@@ -13,43 +18,46 @@ class Header extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      searchQuery: '',
+      query: '',
     };
   }
   handleChange({ target }) {
-    const { value } = target;
-
     this.setState({
-      searchQuery: value,
+      query: target.value,
     });
   }
 
   fetchSongsByQuery() {
     const { fetchSearch } = this.props;
-    const { searchQuery } = this.state;
+    const { query } = this.state;
 
-    if (searchQuery !== '') {
-      fetchSearch({query: searchQuery, quantity: '0'});
+    if (query) {
+      fetchSearch({ query, quantity: '0' });
     }
   }
 
   render() {
+    const { redirect } = this.props;
     return (
       <SearchHeader>
-        <HeaderDiv>
-          <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="Logo da minha futura empresa querida" />
-        </HeaderDiv>
+        <HeaderImgDiv>
+          <a href="https://manipulae.com.br/" target="_blank" rel="noreferrer">
+            <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="Logo da minha futura empresa querida <3" />
+          </a>
+        </HeaderImgDiv>
         <SearchInputContainer>
-          <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="" />
+          <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="Ícone de lupa" />
           <SearchInput type="text" placeholder="Pesquise por nome de música, artista ou álbum" onChange={this.handleChange} />
           <button type="button" onClick={() => this.fetchSongsByQuery()}>
             Pesquisar
           </button>
         </SearchInputContainer>
-        <AccountDiv>
-          <img src={profile} alt="Foto de perfil" />
-          <p>Minhas Favoritas</p>
-        </AccountDiv>
+        <Link to={redirect ? redirect : 'MyLibrary'}>
+          <AccountDiv>
+            <img src={avatar} alt="Foto de perfil" />
+            <p>{redirect ? 'Voltar ao TOP Charts' : 'Minha biblioteca'}</p>
+          </AccountDiv>
+        </Link>
       </SearchHeader>
     );
   }
@@ -58,5 +66,9 @@ class Header extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   fetchSearch: (payload) => dispatch(fetchAPIWithQuery(payload)),
 });
+
+Header.propTypes = {
+  fetchSearch: PropTypes.func,
+}.isRequired;
 
 export default connect(null, mapDispatchToProps)(Header);
