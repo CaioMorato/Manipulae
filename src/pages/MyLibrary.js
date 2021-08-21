@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { MostPlayedSection, Loading } from '../SongsSectionStyles';
 import { SongsDiv, ButtonsDiv, MostPlayed } from '../SongsListStyles';
 import { resetFavorites, saveCurrentSong } from '../redux/actions/changeSongsActions';
@@ -78,5 +79,11 @@ const mapDispatchToProps = (dispatch) => ({
   sendSongToRedux: (payload) => dispatch(saveCurrentSong(payload)),
   updateFavorites: (payload) => dispatch(resetFavorites(payload)),
 });
+
+MyLibrary.propTypes = {
+  favorites: PropTypes.arrayOf(Object),
+  sendSongToRedux: PropTypes.func,
+  updateFavorites: PropTypes.func,
+}.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyLibrary);

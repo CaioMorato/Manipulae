@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Footer, ProgressBarDiv } from '../styles';
 import { ImPlay2, ImPause2 } from 'react-icons/im';
 import { MdFavorite } from 'react-icons/md';
@@ -93,5 +94,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   sendFavoriteToRedux: (payload) => dispatch(makeFavorite(payload)),
 });
+
+MusicPlayer.propTypes = {
+  music_preview: PropTypes.objectOf(Object),
+  sendFavoriteToRedux: PropTypes.func,
+}.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer);
