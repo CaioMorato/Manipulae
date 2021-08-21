@@ -24,7 +24,6 @@ class SongsList extends React.Component {
 
     this.state = {
       offSet: 0,
-      favorites: [],
     };
   }
 
@@ -39,13 +38,7 @@ class SongsList extends React.Component {
 
   saveFavorites(music) {
     const { sendFavoriteToRedux } = this.props;
-    this.setState(
-      (prevState) => ({
-        ...prevState,
-        favorites: [...prevState.favorites, music],
-      }),
-      () => sendFavoriteToRedux(this.state.favorites)
-    );
+    sendFavoriteToRedux(music);
   }
 
   convertTime(durationInSeconds) {
@@ -65,8 +58,8 @@ class SongsList extends React.Component {
     return (
       <MostPlayedSection>
         <MostPlayed>
-          {whichListToRender.data.map((music) => (
-            <SongsDiv key={music.id}>
+          {whichListToRender.data.map((music, index) => (
+            <SongsDiv key={index}>
               <h4>{music.title || music.name}</h4>
               <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} />
               <p>{music.artist.name}</p>

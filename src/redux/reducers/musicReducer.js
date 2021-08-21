@@ -1,4 +1,4 @@
-import { CURRENT_SONG, SEARCH_SONGS_LOADING, SEARCH_SONGS_SUCCESS, SEARCH_SONGS_FAILED, FAVORITE_SONG } from '../actions/changeSongsActions';
+import { CURRENT_SONG, SEARCH_SONGS_LOADING, SEARCH_SONGS_SUCCESS, SEARCH_SONGS_FAILED, FAVORITE_SONG, RESET_FAVORITES } from '../actions/changeSongsActions';
 
 const INITIAL_USER_STATE = {
   showChart: true,
@@ -44,6 +44,11 @@ const musicReducer = (state = INITIAL_USER_STATE, action) => {
         error: action.payload,
       };
     case FAVORITE_SONG:
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    case RESET_FAVORITES:
       return {
         ...state,
         favorites: action.payload,

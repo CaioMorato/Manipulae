@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Footer, ProgressBarDiv } from '../styles';
 import { ImPlay2, ImPause2 } from 'react-icons/im';
 import { MdFavorite } from 'react-icons/md';
+import { makeFavorite } from '../redux/actions/changeSongsActions';
 
 class MusicPlayer extends React.Component {
   constructor() {
@@ -10,8 +11,12 @@ class MusicPlayer extends React.Component {
 
     this.changeSongState = this.changeSongState.bind(this);
     this.slideBar = this.slideBar.bind(this);
+    this.saveFavorites = this.saveFavorites.bind(this);
+    this.updateRange = this.updateRange.bind(this);
+
     this.audioPlayer = React.createRef();
     this.progressBar = React.createRef();
+    this.animationRef = React.createRef();
 
     this.state = {
       isPlaying: false,
@@ -26,28 +31,35 @@ class MusicPlayer extends React.Component {
         isPlaying: true,
       });
       this.audioPlayer.current.play();
+      this.animationRef.current = requestAnimationFrame(this.updateRange);
     } else {
       this.setState({
         isPlaying: false,
       });
       this.audioPlayer.current.pause();
+      cancelAnimationFrame(this.animationRef);
     }
-
-    setInterval(() => {
-      this.progressBar.current.value = this.audioPlayer.current.currentTime;
-    }, ONE_SECOND);
+  }
+  updateRange() {
+    this.progressBar.current.value = this.audioPlayer.current?.currentTime;
+    this.animationRef.current = requestAnimationFrame(this.updateRange);
   }
 
   slideBar() {
     this.audioPlayer.current.currentTime = this.progressBar.current.value;
   }
 
+  saveFavorites(music) {
+    const { sendFavoriteToRedux } = this.props;
+    sendFavoriteToRedux(music);
+  }
+
   render() {
     const { music_preview } = this.props;
     const { isPlaying } = this.state;
 
-    const previewDuration = music_preview.preview ? this.audioPlayer.current.duration : 100;
-    const previewDefaultValue = music_preview.preview ? this.audioPlayer.current.duration : 0;
+    const previewDuration = music_preview.preview ? this.audioPlayer.current?.duration : 100;
+    const previewDefaultValue = music_preview.preview ? this.audioPlayer.current?.duration : 0;
 
     return (
       <Footer>
@@ -68,7 +80,7 @@ class MusicPlayer extends React.Component {
             className="slider"
           />
         </ProgressBarDiv>
-        <MdFavorite className="react-fav-icon" size={40} />
+        <MdFavorite className="react-fav-icon" onClick={() => this.saveFavorites(music_preview)} size={40} />
       </Footer>
     );
   }
@@ -78,4 +90,8 @@ const mapStateToProps = (state) => ({
   music_preview: state.musicReducer.music_preview,
 });
 
-export default connect(mapStateToProps)(MusicPlayer);
+const mapDispatchToProps = (dispatch) => ({
+  sendFavoriteToRedux: (payload) => dispatch(makeFavorite(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer);
