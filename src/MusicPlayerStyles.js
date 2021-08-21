@@ -1,29 +1,29 @@
 import styled from 'styled-components';
 
 export const Footer = styled.footer`
-  display: flex;
-  justify-content: space-evenly;
   align-items: center;
   background-color: #fff;
-  position: fixed;
-  width: 100%;
-  height: 13vh;
-  top: 87vh;
   box-shadow: 1px 1px 11px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  height: 13vh;
+  justify-content: space-evenly;
+  position: fixed;
+  top: 87vh;
+  width: 100%;
 
   > div img {
+    border-radius: 7px;
+    height: 60px;
     margin: 0;
     width: 60px;
-    height: 60px;
-    border-radius: 7px;
   }
 
   div:nth-of-type(2) {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
   }
 
   div:nth-of-type(2):hover {
@@ -33,21 +33,21 @@ export const Footer = styled.footer`
 
   .slider {
     -webkit-appearance: none;
+    background-color: black;
     border-radius: 20px;
     height: 9px;
-    background-color: black;
   }
 
   .slider::-webkit-slider-thumb {
-    box-shadow: 1px 1px 6px #000000;
-    border: 1px solid black;
-    height: 22px;
-    width: 14px;
-    border-radius: 7px;
-    background: #fff;
-    cursor: pointer;
     -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid black;
+    border-radius: 7px;
+    box-shadow: 1px 1px 6px #000000;
+    cursor: pointer;
+    height: 22px;
     margin-top: -3.6px;
+    width: 14px;
   }
 
   .react-fav-icon:hover {

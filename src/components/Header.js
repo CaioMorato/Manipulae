@@ -46,7 +46,7 @@ class Header extends React.Component {
           </a>
         </HeaderImgDiv>
         <SearchInputContainer>
-          <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="" />
+          <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="Ícone de lupa" />
           <SearchInput type="text" placeholder="Pesquise por nome de música, artista ou álbum" onChange={this.handleChange} />
           <button type="button" onClick={() => this.fetchSongsByQuery()}>
             Pesquisar

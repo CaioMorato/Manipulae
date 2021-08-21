@@ -34,8 +34,8 @@ class SongsSection extends React.Component {
   }
 }
 
-const mapStateToProps = ({ listReducer, musicReducer }) => ({
-  loading: listReducer.loading,
+const mapStateToProps = ({ topChartReducer, musicReducer }) => ({
+  loading: topChartReducer.loading,
   showChart: musicReducer.showChart,
   query: musicReducer.query,
 });

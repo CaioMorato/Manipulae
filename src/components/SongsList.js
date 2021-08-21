@@ -82,13 +82,13 @@ class SongsList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  chart: state.listReducer.chart,
-  showChart: state.musicReducer.showChart,
-  search_songs: state.musicReducer.search_songs,
-  quantity: state.musicReducer.quantity,
-  query: state.musicReducer.query,
-  headers: state.musicReducer.headers,
+const mapStateToProps = ({ topChartReducer, musicReducer }) => ({
+  chart: topChartReducer.chart,
+  showChart: musicReducer.showChart,
+  search_songs: musicReducer.search_songs,
+  quantity: musicReducer.quantity,
+  query: musicReducer.query,
+  headers: musicReducer.headers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

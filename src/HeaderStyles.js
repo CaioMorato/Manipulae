@@ -1,41 +1,42 @@
 import styled from 'styled-components';
 
 export const SearchHeader = styled.header`
-  display: flex;
-  justify-content: space-around;
-  font-family: 'Roboto', sans-serif;
-  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.2);
   background-color: white;
+  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  justify-content: space-around;
+
   a {
-    text-decoration: none;
     color: black;
+    text-decoration: none;
   }
 `;
 
 export const HeaderImgDiv = styled.div`
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 export const SearchInputContainer = styled.div`
-  width: 50%;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 50%;
 
   > img {
-    position: relative;
-    left: 32px;
     height: 24px;
+    left: 32px;
+    position: relative;
   }
 
   > button {
     background-color: white;
-    font-size: 20px;
-    width: 10%;
     border: none;
+    font-size: 20px;
     margin: 0 0 0 10px;
+    width: 10%;
   }
 
   > button:hover {
@@ -48,20 +49,21 @@ export const SearchInputContainer = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  width: 55%;
-  height: 40%;
   border-radius: 10px;
-  padding: 0 0 0 34px;
-  outline: none;
-  font-weight: 600;
   font-size: 15px;
+  font-weight: 600;
+  height: 40%;
+  outline: none;
+  padding: 0 0 0 34px;
+  width: 55%;
 `;
 
 export const AccountDiv = styled.div`
+  align-items: center;
   display: flex;
   flex-flow: column;
   justify-content: center;
-  align-items: center;
+  
   > p {
     margin: 7px auto;
   }

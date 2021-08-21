@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import listReducer from './listReducer';
+import topChartReducer from './topChartReducer';
 import musicReducer from './musicReducer';
 
 const rootReducer = combineReducers({
-  listReducer,
+  topChartReducer,
   musicReducer,
 });
 

@@ -5,7 +5,7 @@ export const NotFoundDIV = styled.div`
   text-align: center;
 
   > a {
-    font-size: x-large;
     color: black;
+    font-size: x-large;
   }
 `;

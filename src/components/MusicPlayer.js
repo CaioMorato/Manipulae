@@ -90,8 +90,8 @@ class MusicPlayer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  music_preview: state.musicReducer.music_preview,
+const mapStateToProps = ({musicReducer}) => ({
+  music_preview: musicReducer.music_preview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
