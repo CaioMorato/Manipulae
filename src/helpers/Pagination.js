@@ -1,5 +1,5 @@
 import React from 'react';
-import { PaginationUL } from '../styles';
+import { PaginationUL, PaginationLI } from '../styles';
 
 class Pagination extends React.Component {
   render() {
@@ -14,11 +14,11 @@ class Pagination extends React.Component {
         {Array.from({ length: Math.min(MAX_BUTTONS, pages) })
           .map((_, index) => index + firstButton)
           .map((page) => (
-            <li>
+            <PaginationLI>
               <button type="button" onClick={() => setOffset((page - 1) * limit)} className={page === current ? 'current-index' : null}>
                 {page}
               </button>
-            </li>
+            </PaginationLI>
           ))}
       </PaginationUL>
     );

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Footer = styled.footer`
   display: flex;
   justify-content: space-evenly;
@@ -50,7 +49,7 @@ export const Footer = styled.footer`
     -webkit-appearance: none;
     margin-top: -3.6px;
   }
-  
+
   .react-fav-icon:hover {
     color: red;
     cursor: pointer;
@@ -73,14 +72,30 @@ export const PaginationUL = styled.ul`
   list-style-type: none;
   margin: auto;
   width: max-content;
+  /* box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2); */
+  /* background-color: white; */
+  border-radius: 9px;
+  padding: 2%;
 
   li + li {
     margin-left: 1rem;
+    color: blue;
   }
 
   .current-index {
     background: none;
     font-weight: bold;
     border: none;
+    font-size: 25px;
+    text-decoration: underline;
+  }
+`;
+
+export const PaginationLI = styled.li`
+  button {
+    background-color: rgb(255, 255, 255, 0);
+    border: none;
+    outline: none;
+    font-size: 20px;
   }
 `;

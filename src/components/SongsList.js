@@ -76,7 +76,7 @@ class SongsList extends React.Component {
             </SongsDiv>
           ))}
         </MostPlayed>
-        {!showChart && <Pagination limit={LIMITE_PAG} total={headers ? headers['content-length'] : 1} offset={offSet} setOffset={this.setOffset} />}
+        <div>{!showChart && <Pagination limit={LIMITE_PAG} total={headers ? headers['content-length'] : 1} offset={offSet} setOffset={this.setOffset} />}</div>
       </MostPlayedSection>
     );
   }
