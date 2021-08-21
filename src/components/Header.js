@@ -37,6 +37,7 @@ class Header extends React.Component {
   }
 
   render() {
+    const { redirect } = this.props;
     return (
       <SearchHeader>
         <HeaderImgDiv>
@@ -51,10 +52,10 @@ class Header extends React.Component {
             Pesquisar
           </button>
         </SearchInputContainer>
-        <Link to="/MyLibrary">
+        <Link to={redirect ? redirect : 'MyLibrary'}>
           <AccountDiv>
             <img src={avatar} alt="Foto de perfil" />
-            <p>Minhas Favoritas</p>
+            <p>{redirect ? 'Voltar ao TOP Charts' : 'Minha biblioteca'}</p>
           </AccountDiv>
         </Link>
       </SearchHeader>
