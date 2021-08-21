@@ -18,7 +18,7 @@ class SongsSection extends React.Component {
   renderLoading() {
     const { loading } = this.props;
     if (loading) {
-      return <Loading>Carregando as melhores músicas pra você</Loading>;
+      return <Loading fontSize="40px">Carregando as melhores músicas pra você</Loading>;
     }
   }
 

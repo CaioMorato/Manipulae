@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Loading = styled.p`
   text-align: center;
-  font-size: larger;
+  font-size: ${(props) => props.fontSize || 'larger'};
+  margin: auto;
 `;
 
 export const PageTitle = styled.h1`
