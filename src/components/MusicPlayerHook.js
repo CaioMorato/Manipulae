@@ -21,7 +21,7 @@ const MusicPlayerHook = ({ sendFavoriteToRedux, music_preview }) => {
   const animationRef = useRef();
 
   useEffect(() => {
-    const seconds = Math.floor(audioPlayer.current.duration);
+    const seconds = Math.floor(+audioPlayer.current.duration);
     setDuration(seconds);
     progressBar.current.max = seconds;
   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
@@ -30,10 +30,12 @@ const MusicPlayerHook = ({ sendFavoriteToRedux, music_preview }) => {
     if (!isPlaying) {
       playSong(true);
       audioPlayer.current.play();
+      // this represents the slideBar animation, to move while the songs play
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
       playSong(false);
       audioPlayer.current.pause();
+      // this cancels the animation because the song is paused
       cancelAnimationFrame(animationRef.current);
     }
   };
@@ -71,7 +73,7 @@ const MusicPlayerHook = ({ sendFavoriteToRedux, music_preview }) => {
           ref={progressBar}
           className="slider"
         />
-        <div>{duration}</div>
+        <div>{isNaN(duration) || duration}</div>
       </ProgressBarDiv>
       <MdFavorite className="react-fav-icon" onClick={() => saveFavorites(music_preview)} size={40} />
     </Footer>
