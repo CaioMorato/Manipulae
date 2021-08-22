@@ -63,7 +63,6 @@ export const Footer = styled.footer`
 
 export const ProgressBarDiv = styled.div`
   align-items: center;
-  border: 1px solid black;
   display: flex;
   flex-flow: row;
   justify-content: space-evenly;

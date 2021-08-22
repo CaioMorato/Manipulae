@@ -31,11 +31,11 @@ const MyLibrary = ({ favorites, sendSongToRedux, updateFavorites }) => {
     const newFavorites = favorites.filter((allSongs) => allSongs.id !== music.id);
     await updateFavorites(newFavorites);
     console.log(newFavorites);
-    await updateLocalStorage(newFavorites);
+    updateLocalStorage(newFavorites);
   };
 
-  const updateLocalStorage = async (newFavorites) => {
-    await localStorage.setItem('favoriteSongs', JSON.stringify(newFavorites));
+  const updateLocalStorage = (newFavorites) => {
+    localStorage.setItem('favoriteSongs', JSON.stringify(newFavorites));
   };
 
   return (
