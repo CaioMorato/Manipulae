@@ -1,12 +1,15 @@
 // vitals
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// redux
+import { pageChange } from '../redux/actions/changeSongsActions';
 // styles
 import { PaginationUL, PaginationLI } from '../PaginationStyles';
 
 class Pagination extends React.Component {
   render() {
-    const { limit, total, offset, setOffset } = this.props;
+    const { limit, total, offset, setOffset, changePage } = this.props;
     const MAX_BUTTONS = 9;
     const MAX_SIDE = (MAX_BUTTONS - 1) / 2;
     const current = offset ? offset / limit + 1 : 1;
@@ -18,7 +21,14 @@ class Pagination extends React.Component {
           .map((_, index) => index + firstButton)
           .map((page) => (
             <PaginationLI>
-              <button type="button" onClick={() => setOffset((page - 1) * limit)} className={page === current ? 'current-index' : null}>
+              <button
+                type="button"
+                onClick={async ({ target }) => {
+                  await changePage(target.innerHTML);
+                  setOffset((page - 1) * limit);
+                }}
+                className={page === current ? 'current-index' : null}
+              >
                 {page}
               </button>
             </PaginationLI>
@@ -28,11 +38,16 @@ class Pagination extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  changePage: (payload) => dispatch(pageChange(payload)),
+});
+
 Pagination.propTypes = {
   limit: PropTypes.number,
   total: PropTypes.number,
   offset: PropTypes.numer,
   setOffset: PropTypes.func,
+  changePage: PropTypes.func,
 }.isRequired;
 
-export default Pagination;
+export default connect(null, mapDispatchToProps)(Pagination);

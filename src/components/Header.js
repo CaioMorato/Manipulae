@@ -1,7 +1,7 @@
 // vitals
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // redux
 import { fetchAPIWithQuery } from '../redux/actions/changeSongsActions';
@@ -21,6 +21,7 @@ class Header extends React.Component {
       query: '',
     };
   }
+
   handleChange({ target }) {
     this.setState({
       query: target.value,
@@ -38,6 +39,9 @@ class Header extends React.Component {
 
   render() {
     const { redirect } = this.props;
+    const { shouldRedirect } = this.state;
+    if (shouldRedirect) return <Redirect to="/" />;
+
     return (
       <SearchHeader>
         <HeaderImgDiv>
@@ -48,7 +52,13 @@ class Header extends React.Component {
         <SearchInputContainer>
           <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/search-480.png" alt="Ícone de lupa" />
           <SearchInput type="text" placeholder="Pesquise por nome de música, artista ou álbum" onChange={this.handleChange} />
-          <button type="button" onClick={() => this.fetchSongsByQuery()}>
+          <button
+            type="button"
+            onClick={() => {
+              this.fetchSongsByQuery();
+              if (redirect) this.setState({ shouldRedirect: true });
+            }}
+          >
             Pesquisar
           </button>
         </SearchInputContainer>

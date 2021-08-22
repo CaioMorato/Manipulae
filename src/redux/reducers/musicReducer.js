@@ -1,4 +1,4 @@
-import { CURRENT_SONG, SEARCH_SONGS_LOADING, SEARCH_SONGS_SUCCESS, SEARCH_SONGS_FAILED, FAVORITE_SONG, RESET_FAVORITES } from '../actions/changeSongsActions';
+import { CURRENT_SONG, SEARCH_SONGS_LOADING, SEARCH_SONGS_SUCCESS, SEARCH_SONGS_FAILED, FAVORITE_SONG, RESET_FAVORITES, PAGE_CHANGE } from '../actions/changeSongsActions';
 
 const INITIAL_USER_STATE = {
   showChart: true,
@@ -27,7 +27,6 @@ const musicReducer = (state = INITIAL_USER_STATE, action) => {
       return {
         ...state,
         search_songs: action.payload,
-        quantity: Number(state.quantity) + 25,
         query: action.query,
         loading: false,
         showChart: false,
@@ -52,6 +51,11 @@ const musicReducer = (state = INITIAL_USER_STATE, action) => {
       return {
         ...state,
         favorites: action.payload,
+      };
+    case PAGE_CHANGE:
+      return {
+        ...state,
+        quantity: (action.payload - 1) * 25,
       };
     default:
       return state;

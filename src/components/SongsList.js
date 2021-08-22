@@ -21,6 +21,7 @@ class SongsList extends React.Component {
     this.setOffset = this.setOffset.bind(this);
     this.saveFavorites = this.saveFavorites.bind(this);
     this.convertTime = this.convertTime.bind(this);
+    this.saveStorage = this.saveStorage.bind(this);
 
     this.state = {
       offSet: 0,
@@ -36,9 +37,16 @@ class SongsList extends React.Component {
     fetchSearch({ query, quantity });
   }
 
-  saveFavorites(music) {
+  async saveFavorites(music) {
     const { sendFavoriteToRedux } = this.props;
-    sendFavoriteToRedux(music);
+    await sendFavoriteToRedux(music);
+
+    this.saveStorage();
+  }
+
+  saveStorage() {
+    const { favorites } = this.props;
+    localStorage.setItem('favoriteSongs', JSON.stringify(favorites));
   }
 
   convertTime(durationInSeconds) {
@@ -54,13 +62,13 @@ class SongsList extends React.Component {
     const LIMITE_PAG = 25;
     // If we want to render the top chart showCart will be true so we will read chart.tracks array.
     // If showCart is false we will get search_songs.data array
-    const whichListToRender = showChart ? chart.tracks : search_songs.data;
+    let whichListToRender = showChart ? chart.tracks : search_songs.data;
     return (
       <MostPlayedSection>
         <MostPlayed>
           {whichListToRender.data.map((music, index) => (
             <SongsDiv key={index}>
-              <h4>{music.title || music.name}</h4>
+              <h4>{music.title}</h4>
               <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} />
               <p>{music.artist.name}</p>
               <h5>{this.convertTime(music.duration)}</h5>
@@ -71,7 +79,7 @@ class SongsList extends React.Component {
                 <button type="button" onClick={() => sendSongToRedux(music)}>
                   <IoMdPlay />
                 </button>
-                <MdFavoriteBorder className="react-fav-icon" size={20} onClick={() => this.saveFavorites(music)} />
+                <MdFavoriteBorder className={'react-fav-icon'} size={20} onClick={() => this.saveFavorites(music)} />
               </ButtonsDiv>
             </SongsDiv>
           ))}
@@ -89,12 +97,15 @@ const mapStateToProps = ({ topChartReducer, musicReducer }) => ({
   quantity: musicReducer.quantity,
   query: musicReducer.query,
   headers: musicReducer.headers,
+  favorites: musicReducer.favorites,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   sendSongToRedux: (payload) => dispatch(saveCurrentSong(payload)),
   fetchSearch: (payload) => dispatch(fetchAPIWithQuery(payload)),
-  sendFavoriteToRedux: (payload) => dispatch(makeFavorite(payload)),
+  sendFavoriteToRedux: (payload) => {
+    dispatch(makeFavorite(payload));
+  },
 });
 
 SongsList.propTypes = {
@@ -104,6 +115,7 @@ SongsList.propTypes = {
   quantity: PropTypes.number,
   query: PropTypes.string,
   headers: PropTypes.objectOf(Object),
+  favorites: PropTypes.arrayOf(Object),
   sendSongToRedux: PropTypes.func,
   fetchSearch: PropTypes.func,
   sendFavoriteToRedux: PropTypes.func,

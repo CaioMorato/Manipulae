@@ -22,6 +22,15 @@ class MyLibrary extends React.Component {
 
     this.convertTime = this.convertTime.bind(this);
     this.removeFavorites = this.removeFavorites.bind(this);
+    this.updateLocalStorage = this.updateLocalStorage.bind(this);
+  }
+
+  componentDidMount() {
+    const { updateFavorites } = this.props;
+
+    if (localStorage.getItem('favoriteSongs')) {
+      updateFavorites(JSON.parse(localStorage.getItem('favoriteSongs')));
+    }
   }
 
   convertTime(durationInSeconds) {
@@ -31,14 +40,21 @@ class MyLibrary extends React.Component {
     return `${MINUTES}:${SECONDS > 9 ? SECONDS : '0' + SECONDS}`;
   }
 
-  removeFavorites(music) {
+  async removeFavorites(music) {
     const { updateFavorites, favorites } = this.props;
     const newFavorites = favorites.filter((allSongs) => allSongs.id !== music.id);
-    updateFavorites(newFavorites);
+    await updateFavorites(newFavorites);
+    this.updateLocalStorage();
+  }
+
+  updateLocalStorage() {
+    const { favorites } = this.props;
+    localStorage.setItem('favoriteSongs', JSON.stringify(favorites));
   }
 
   render() {
-    const { favorites, sendSongToRedux } = this.props;
+    const { sendSongToRedux, favorites } = this.props;
+
     return (
       <>
         <Header redirect="/" />
@@ -48,7 +64,7 @@ class MyLibrary extends React.Component {
             {favorites.length > 0 ? (
               favorites.map((music, index) => (
                 <SongsDiv key={index}>
-                  <h4>{music.title || music.name}</h4>
+                  <h4>{music.title}</h4>
                   <img src={music.album.cover_medium} alt={`Capa da música ${music.title}`} />
                   <p>{music.artist.name}</p>
                   <h5>{this.convertTime(music.duration)}</h5>
@@ -74,8 +90,8 @@ class MyLibrary extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  favorites: state.musicReducer.favorites,
+const mapStateToProps = ({ musicReducer }) => ({
+  favorites: musicReducer.favorites,
 });
 
 const mapDispatchToProps = (dispatch) => ({
