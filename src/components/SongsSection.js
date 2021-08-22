@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // components
 import SongsList from './SongsList';
-import MusicPlayer from './MusicPlayer';
+import MusicPlayerHook from './MusicPlayerHook';
 // styles
 import { Loading, PageTitle } from '../SongsSectionStyles';
 
@@ -28,7 +28,7 @@ class SongsSection extends React.Component {
       <>
         <PageTitle>{showChart ? 'Top 10 músicas mais ouvidas' : `Buscas relacionadas a '${query}'`}</PageTitle>
         {this.renderLoading() || <SongsList />}
-        <MusicPlayer />
+        <MusicPlayerHook />
       </>
     );
   }
