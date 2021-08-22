@@ -6,6 +6,7 @@ export const SEARCH_SONGS_SUCCESS = 'SEARCH_SONGS_SUCCESS';
 export const SEARCH_SONGS_FAILED = 'SEARCH_SONGS_FAILED';
 export const FAVORITE_SONG = 'FAVORITE_SONG';
 export const RESET_FAVORITES = 'RESET_FAVORITES';
+export const PAGE_CHANGE = 'PAGE_CHANGE';
 
 export const saveCurrentSong = (payload) => ({
   type: CURRENT_SONG,
@@ -16,10 +17,9 @@ export const getSearchMusics = () => ({
   type: SEARCH_SONGS_LOADING,
 });
 
-export const saveSearchMusics = (payload, quantity, query) => ({
+export const saveSearchMusics = (payload, query) => ({
   type: SEARCH_SONGS_SUCCESS,
   payload,
-  quantity,
   query,
 });
 
@@ -33,7 +33,7 @@ export const fetchAPIWithQuery = (payload) => {
     dispatch(getSearchMusics());
     try {
       const requestMusic = await axios.get(`/search?q=${payload.query}&index=${payload.quantity}`);
-      dispatch(saveSearchMusics(requestMusic, payload.quantity, payload.query));
+      dispatch(saveSearchMusics(requestMusic, payload.query));
     } catch (error) {
       dispatch(errorFetching(error));
     }
@@ -47,5 +47,10 @@ export const makeFavorite = (payload) => ({
 
 export const resetFavorites = (payload) => ({
   type: RESET_FAVORITES,
+  payload,
+});
+
+export const pageChange = (payload) => ({
+  type: PAGE_CHANGE,
   payload,
 });
