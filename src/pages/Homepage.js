@@ -1,28 +1,27 @@
 // vitals
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // components
-import HeaderHook from '../components/HeaderHook';
+import Header from '../components/Header';
 import SongsSection from '../components/SongsSection';
+import MusicPlayerHook from '../components/MusicPlayerHook';
 // redux
 import { fetchAPI } from '../redux/actions/firstFetchActions';
 
-class Homepage extends React.Component {
-  componentDidMount() {
-    const { topChartFetch } = this.props;
+const Homepage = ({ topChartFetch }) => {
+  useEffect(() => {
     topChartFetch();
-  }
+  });
 
-  render() {
-    return (
-      <>
-        <HeaderHook />
-        <SongsSection />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Header />
+      <SongsSection />
+      <MusicPlayerHook />
+    </>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   topChartFetch: () => dispatch(fetchAPI()),

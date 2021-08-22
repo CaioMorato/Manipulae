@@ -25,11 +25,10 @@ class SongsSection extends React.Component {
   render() {
     const { showChart, query } = this.props;
     return (
-      <>
+      <main>
         <PageTitle>{showChart ? 'Top 10 músicas mais ouvidas' : `Buscas relacionadas a '${query}'`}</PageTitle>
         {this.renderLoading() || <SongsList />}
-        <MusicPlayerHook />
-      </>
+      </main>
     );
   }
 }
