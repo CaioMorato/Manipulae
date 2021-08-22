@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // components
 import Header from '../components/Header';
 import SongsSection from '../components/SongsSection';
-import MusicPlayerHook from '../components/MusicPlayerHook';
+import MusicPlayerHook from '../components/MusicPlayer';
 // redux
 import { fetchAPI } from '../redux/actions/firstFetchActions';
 

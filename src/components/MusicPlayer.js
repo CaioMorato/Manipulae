@@ -1,5 +1,5 @@
 // vitals
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // redux
@@ -9,88 +9,78 @@ import { MdFavorite } from 'react-icons/md';
 import { ImPlay2, ImPause2 } from 'react-icons/im';
 import { Footer, ProgressBarDiv } from '../MusicPlayerStyles';
 
-class MusicPlayer extends React.Component {
-  constructor() {
-    super();
+const MusicPlayerHook = ({ sendFavoriteToRedux, music_preview }) => {
+  // states
+  const [isPlaying, playSong] = useState(false);
+  const [current_time, changeCurrent_time] = useState(0);
+  const [duration, setDuration] = useState(0);
 
-    this.changeSongState = this.changeSongState.bind(this);
-    this.slideBar = this.slideBar.bind(this);
-    this.saveFavorites = this.saveFavorites.bind(this);
-    // this.updateRange = this.updateRange.bind(this);
+  // references
+  const audioPlayer = useRef();
+  const progressBar = useRef();
+  const animationRef = useRef();
 
-    this.audioPlayer = React.createRef();
-    this.progressBar = React.createRef();
+  useEffect(() => {
+    const seconds = Math.floor(+audioPlayer.current.duration);
+    setDuration(seconds);
+    progressBar.current.max = seconds;
+  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
-    this.state = {
-      isPlaying: false,
-      current_time: 0,
-    };
-  }
-
-  changeSongState() {
-    let { isPlaying } = this.state;
-    const ONE_SECOND = 1000;
+  const changeSongState = () => {
     if (!isPlaying) {
-      this.setState({
-        isPlaying: true,
-      });
-      this.audioPlayer.current.play();
-      setInterval(() => {
-        this.setState((prevState) => ({
-          current_time: prevState.current_time + 1,
-        }));
-      }, ONE_SECOND);
+      playSong(true);
+      audioPlayer.current.play();
+      // this represents the slideBar animation, to move while the songs play
+      animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
-      this.setState({
-        isPlaying: false,
-      });
-      this.audioPlayer.current.pause();
+      playSong(false);
+      audioPlayer.current.pause();
+      // this cancels the animation because the song is paused
+      cancelAnimationFrame(animationRef.current);
     }
-  }
+  };
 
-  slideBar() {
-    this.audioPlayer.current.currentTime = this.progressBar.current.value;
-  }
+  const changeRange = () => {
+    audioPlayer.current.currentTime = progressBar.current.value;
+    changeCurrent_time(progressBar.current.value);
+  };
 
-  saveFavorites(music) {
-    const { sendFavoriteToRedux } = this.props;
+  const whilePlaying = () => {
+    progressBar.current.value = audioPlayer.current.currentTime;
+    changeCurrent_time(progressBar.current.value);
+    animationRef.current = requestAnimationFrame(whilePlaying);
+  };
+
+  const saveFavorites = (music) => {
     sendFavoriteToRedux(music);
-  }
+  };
 
-  render() {
-    const { music_preview } = this.props;
-    const { isPlaying, current_time } = this.state;
+  return (
+    <Footer>
+      <div>
+        <audio src={music_preview.preview} preload="metadata" ref={audioPlayer} />
+        <img src={music_preview.album.cover_small} alt="Capa da música que está tocando agora" />
+      </div>
+      <div>{isPlaying ? <ImPause2 size={30} onClick={changeSongState} color="black" /> : <ImPlay2 size={30} onClick={changeSongState} color="black" />}</div>
+      <ProgressBarDiv>
+        {current_time}
+        <input
+          type="range"
+          defaultValue={0}
+          onChange={() => {
+            changeRange();
+          }}
+          ref={progressBar}
+          className="slider"
+        />
+        <div>{isNaN(duration) || duration}</div>
+      </ProgressBarDiv>
+      <MdFavorite className="react-fav-icon" onClick={() => saveFavorites(music_preview)} size={40} />
+    </Footer>
+  );
+};
 
-    const previewDuration = this.audioPlayer.current?.duration;
-    // const previewDefaultValue = this.audioPlayer.current?.duration;
-
-    return (
-      <Footer>
-        <div>
-          <audio src={music_preview.preview} ref={this.audioPlayer} />
-          <img src={music_preview.album.cover_small} alt="Capa da música que está tocando agora" />
-        </div>
-        <div>{isPlaying ? <ImPause2 size={30} onClick={this.changeSongState} color="black" /> : <ImPlay2 size={30} onClick={this.changeSongState} color="black" />}</div>
-        <ProgressBarDiv>
-          <input
-            type="range"
-            defaultValue={current_time}
-            max={previewDuration}
-            onChange={() => {
-              this.slideBar();
-            }}
-            ref={this.progressBar}
-            className="slider"
-          />
-          <p>Infelizmente o slider não acompanha a música sozinho, mas ao arrastar, a música acompanha o slider! &#128518;</p>
-        </ProgressBarDiv>
-        <MdFavorite className="react-fav-icon" onClick={() => this.saveFavorites(music_preview)} size={40} />
-      </Footer>
-    );
-  }
-}
-
-const mapStateToProps = ({musicReducer}) => ({
+const mapStateToProps = ({ musicReducer }) => ({
   music_preview: musicReducer.music_preview,
 });
 
@@ -98,9 +88,9 @@ const mapDispatchToProps = (dispatch) => ({
   sendFavoriteToRedux: (payload) => dispatch(makeFavorite(payload)),
 });
 
-MusicPlayer.propTypes = {
+MusicPlayerHook.propTypes = {
   music_preview: PropTypes.objectOf(Object),
   sendFavoriteToRedux: PropTypes.func,
 }.isRequired;
 
-export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer);
+export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayerHook);

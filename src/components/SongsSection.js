@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // components
 import SongsList from './SongsList';
-import MusicPlayerHook from './MusicPlayerHook';
+import MusicPlayerHook from './MusicPlayer';
 // styles
 import { Loading, PageTitle } from '../SongsSectionStyles';
 
