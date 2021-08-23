@@ -20,6 +20,12 @@ Consumindo uma API do deezer, será listado na página inicial as 10 músicas ma
 Através do campo de busca é possível realizar buscas na API por nome do artista, música ou álbum.
 Também é possível adicionar as músicas aos favoritos e vê-las agrupadas em uma outra tela.
 
+Todas as branchs exceto a 'Hooks' foram mergeadas pois representam features adicionadas.
+
+A branch 'Hooks' foi uma tentativa de converter todos os componentes de classe pra componentes funcionais.
+
+Nessa branch consegui fazer com que o input range acompanhasse a música, porém acabei não conseguindo completar a conversão então ainda está com alguns bugs.
+
 #### Technologies
 
 - Axios
