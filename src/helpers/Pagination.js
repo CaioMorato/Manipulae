@@ -7,36 +7,34 @@ import { pageChange } from '../redux/actions/changeSongsActions';
 // styles
 import { PaginationUL, PaginationLI } from '../PaginationStyles';
 
-class Pagination extends React.Component {
-  render() {
-    const { limit, total, offset, setOffSet, changePage } = this.props;
-    const MAX_BUTTONS = 9;
-    const MAX_SIDE = (MAX_BUTTONS - 1) / 2;
-    const current = offset ? offset / limit + 1 : 1;
-    const pages = Math.ceil(total / limit);
-    const firstButton = Math.max(current - MAX_SIDE, 1);
-    return (
-      <PaginationUL>
-        {Array.from({ length: Math.min(MAX_BUTTONS, pages) })
-          .map((_, index) => index + firstButton)
-          .map((page) => (
-            <PaginationLI>
-              <button
-                type="button"
-                onClick={async ({ target }) => {
-                  await changePage(target.innerHTML);
-                  setOffSet((page - 1) * limit);
-                }}
-                className={page === current ? 'current-index' : null}
-              >
-                {page}
-              </button>
-            </PaginationLI>
-          ))}
-      </PaginationUL>
-    );
-  }
-}
+const Pagination = (limit, total, offset, setOffSet, changePage) => {
+  const MAX_BUTTONS = 9;
+  const MAX_SIDE = (MAX_BUTTONS - 1) / 2;
+  const current = offset ? offset / limit + 1 : 1;
+  const pages = Math.ceil(total / limit);
+  const firstButton = Math.max(current - MAX_SIDE, 1);
+
+  return (
+    <PaginationUL>
+      {Array.from({ length: Math.min(MAX_BUTTONS, pages) })
+        .map((_, index) => index + firstButton)
+        .map((page) => (
+          <PaginationLI>
+            <button
+              type="button"
+              onClick={async ({ target }) => {
+                await changePage(target.innerHTML);
+                setOffSet((page - 1) * limit);
+              }}
+              className={page === current ? 'current-index' : null}
+            >
+              {page}
+            </button>
+          </PaginationLI>
+        ))}
+    </PaginationUL>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   changePage: (payload) => dispatch(pageChange(payload)),
