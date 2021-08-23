@@ -51,7 +51,7 @@ const SongsListHook = ({ sendFavoriteToRedux, favorites, chart, search_songs, se
           </SongsDiv>
         ))}
       </MostPlayed>
-      <div>{!showChart && <Pagination limit={25} total={headers ? headers['content-length'] : 1} offset={offSet} setOffset={this.setOffset} />}</div>
+      <div>{!showChart && <Pagination limit={25} total={headers ? headers['content-length'] : 1} offset={offSet} setOffset={setOffset} />}</div>
     </MostPlayedSection>
   );
 };
