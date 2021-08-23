@@ -15,20 +15,26 @@ import { MdFavoriteBorder } from 'react-icons/md';
 // the icon below credits to Freepik from flaticons.com
 import deezerLogo from '../images/deezer-logo.png';
 
-const SongsListHook = ({ sendFavoriteToRedux, favorites, chart, search_songs, sendSongToRedux, showChart, headers }) => {
-  const [offSet, setOffset] = useState(0);
+const SongsListHook = (props) => {
+  const [offSet, setOffSet] = useState(0);
 
   const saveFavorites = async (music) => {
-    await sendFavoriteToRedux(music);
+    await props.sendFavoriteToRedux(music);
 
     saveStorage();
   };
 
-  const saveStorage = () => {
-    localStorage.setItem('favoriteSongs', JSON.stringify(favorites));
+  const updateOffSet = (valor) => {
+    const { query, quantity, fetchSearch } = props;
+    setOffSet(valor);
+    fetchSearch({ query, quantity });
   };
 
-  let whichListToRender = showChart ? chart.tracks : search_songs.data;
+  const saveStorage = () => {
+    localStorage.setItem('favoriteSongs', JSON.stringify(props.favorites));
+  };
+
+  let whichListToRender = props.showChart ? props.chart.tracks : props.search_songs.data;
 
   return (
     <MostPlayedSection>
@@ -43,7 +49,7 @@ const SongsListHook = ({ sendFavoriteToRedux, favorites, chart, search_songs, se
               <a href={music.link} target="_blank" rel="noreferrer">
                 <img src={deezerLogo} alt="Ícone do logo do deezer" />
               </a>
-              <button type="button" onClick={() => sendSongToRedux(music)}>
+              <button type="button" onClick={() => props.sendSongToRedux(music)}>
                 <IoMdPlay />
               </button>
               <MdFavoriteBorder className={'react-fav-icon'} size={20} onClick={() => saveFavorites(music)} />
@@ -51,7 +57,7 @@ const SongsListHook = ({ sendFavoriteToRedux, favorites, chart, search_songs, se
           </SongsDiv>
         ))}
       </MostPlayed>
-      <div>{!showChart && <Pagination limit={25} total={headers ? headers['content-length'] : 1} offset={offSet} setOffset={setOffset} />}</div>
+      {!props.showChart && <Pagination limit={25} total={props.headers ? props.headers['content-length'] : 1} offSet={offSet} setOffSet={updateOffSet} />}
     </MostPlayedSection>
   );
 };

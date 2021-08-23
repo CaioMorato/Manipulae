@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { MdCallToAction } from 'react-icons/md';
 
 export const CURRENT_SONG = 'CURRENT_SONG';
 export const SEARCH_SONGS_LOADING = 'SEARCH_SONGS_LOADING';
@@ -32,7 +33,12 @@ export const fetchAPIWithQuery = (payload) => {
   return async (dispatch) => {
     dispatch(getSearchMusics());
     try {
-      const requestMusic = await axios.get(`/search?q=${payload.query}&index=${payload.quantity}`);
+      const requestMusic = await axios.get('/search?', {
+        params: {
+          q: payload.query,
+          index: payload.quantity,
+        },
+      });
       dispatch(saveSearchMusics(requestMusic, payload.query));
     } catch (error) {
       dispatch(errorFetching(error));

@@ -9,7 +9,7 @@ import { PaginationUL, PaginationLI } from '../PaginationStyles';
 
 class Pagination extends React.Component {
   render() {
-    const { limit, total, offset, setOffset, changePage } = this.props;
+    const { limit, total, offset, setOffSet, changePage } = this.props;
     const MAX_BUTTONS = 9;
     const MAX_SIDE = (MAX_BUTTONS - 1) / 2;
     const current = offset ? offset / limit + 1 : 1;
@@ -25,7 +25,7 @@ class Pagination extends React.Component {
                 type="button"
                 onClick={async ({ target }) => {
                   await changePage(target.innerHTML);
-                  setOffset((page - 1) * limit);
+                  setOffSet((page - 1) * limit);
                 }}
                 className={page === current ? 'current-index' : null}
               >
