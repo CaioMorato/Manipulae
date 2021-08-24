@@ -5,7 +5,6 @@
 ---
 
 ### Seções
-You're sections headers will be used to reference location of destination.
 
 - [Descrição]
 - [Tecnologias]
@@ -26,7 +25,7 @@ A branch 'Hooks' foi uma tentativa de converter todos os componentes de classe p
 
 Nessa branch consegui fazer com que o input range acompanhasse a música, porém acabei não conseguindo completar a conversão então ainda está com alguns bugs.
 
-#### Technologies
+#### Tecnologias
 
 - Axios
 - React
