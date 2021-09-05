@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Manipulae/static/css/main.bb197126.chunk.css",
+    "main.js": "/Manipulae/static/js/main.a77808a5.chunk.js",
+    "main.js.map": "/Manipulae/static/js/main.a77808a5.chunk.js.map",
+    "runtime-main.js": "/Manipulae/static/js/runtime-main.bafe8629.js",
+    "runtime-main.js.map": "/Manipulae/static/js/runtime-main.bafe8629.js.map",
+    "static/css/2.bc9967cb.chunk.css": "/Manipulae/static/css/2.bc9967cb.chunk.css",
+    "static/js/2.5de78143.chunk.js": "/Manipulae/static/js/2.5de78143.chunk.js",
+    "static/js/2.5de78143.chunk.js.map": "/Manipulae/static/js/2.5de78143.chunk.js.map",
+    "index.html": "/Manipulae/index.html",
+    "static/css/2.bc9967cb.chunk.css.map": "/Manipulae/static/css/2.bc9967cb.chunk.css.map",
+    "static/css/main.bb197126.chunk.css.map": "/Manipulae/static/css/main.bb197126.chunk.css.map",
+    "static/js/2.5de78143.chunk.js.LICENSE.txt": "/Manipulae/static/js/2.5de78143.chunk.js.LICENSE.txt",
+    "static/media/reset.css": "/Manipulae/static/media/slick.c94f7671.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bafe8629.js",
+    "static/css/2.bc9967cb.chunk.css",
+    "static/js/2.5de78143.chunk.js",
+    "static/css/main.bb197126.chunk.css",
+    "static/js/main.a77808a5.chunk.js"
+  ]
+}
