@@ -1,6 +1,6 @@
 // vitals
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter as BrowserRouter, Route, Switch } from 'react-router-dom';
 // components
 import Homepage from './pages/Homepage';
 import MyLibrary from './pages/MyLibrary.js';
