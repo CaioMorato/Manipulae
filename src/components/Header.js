@@ -46,7 +46,7 @@ class Header extends React.Component {
       <SearchHeader>
         <HeaderImgDiv>
           <a href="https://manipulae.com.br/" target="_blank" rel="noreferrer">
-            <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="Logo da minha futura empresa querida <3" />
+            <img src="https://manipulae.com.br/static/assets/images/Manipulae_colorido.png" height="55.66px" alt="Logo da empresa" />
           </a>
         </HeaderImgDiv>
         <SearchInputContainer>
